@@ -1,18 +1,24 @@
 <?php
-    include "../mainpage/common.inc.php";
-    include "../db/db_connect.inc.php";
-    session_start();
-    if (!isset($_SESSION['username'])) {
-        header("Location: ../login/login.php");
-    }
+include "../mainpage/common.inc.php";
+include "../db/db_connect.inc.php";
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login/login.php");
+}
 
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
-        <link rel="stylesheet" href="bus.css">
-        <!--<script>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="bus.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+    </script>
+
+    <!--<script>
             function validate(){
                 var input_from=document.getElementById("from");
                 if(input_from.value == ""){
@@ -42,43 +48,69 @@
             } 
         </script>-->
 
-    </head>
-    <body>
-        <div class="box">
-            <h1>Ticket booking here</h1>
-            <form action="bus.php" method="post" onsubmit="return validate();">
-                <p>Enter City</p>
-                <input type="text" name="from" placeholder="Enter city" id="from"><br>
-                <p>TO</p>
-                <input type="text" name="to" placeholder="Enter City" id="to"><br>
-                <p>Date of Journey</p>
-                <input type="date" name="date" placeholder="Pick a date" id="date"><br>
-                <p>Number of Ticket Need</p>
-                <select id="number">
-                    <option disabled>Select</option>
-                    <option value="1">+1</option>
-                    <option value="2">+2</option>
-                    <option value="3">+3</option>
-                    <option value="4">+4</option>
+</head>
 
-                </select><br>
-                <p>Choose Bus Type</p>
-                <input type="radio" id="Ac" name="bus_type" value="Ac">
-                <label for="Ac">AC</label><br>
-                <input type="radio" id="NonAc" name="bus_type" value="NonAc">
-                <label for="Ac">NON AC</label><br>
-                <p>Choose Bus</p>
-                <select id="bus">
-                <option value="void" disabled>Choose one</option>
-                    <option value="Hanif">Hanif</option>
-                    <option value="Green_Line">Green Line</option>
-                    <option value="Soudia">Soudia</option>
-                    <option value="Ena">ENA</option>
+<body>
+    <div class="box">
+        <h1>Ticket booking here</h1>
+        <form action="bus.php" method="post">
 
-                </select><br>
-                <input type="reset">
-                <input type="submit" value="Confirm">
-            </form>
-        </div>
-    </body>
+            <p>Board Location:</p>
+
+            <select name="board" id="board">
+                <option selected="" disabled="">Select City</option>
+                <?php
+                require 'busdata.php';
+                $bus_list = load_bus_list();
+                foreach ($bus_list as $bus_list) {
+                    echo "<option id='" . $bus_list['board'] . "' value='" . $bus_list['board'] . "'>" . $bus_list['board'] . "</option>";
+                }
+                ?>
+            </select>
+
+            <p>Destination Location:</p>
+            <select name="destination" id="destination">
+                <option selected="" disabled="">Select City</option>
+                <?php
+
+                $bus_list = load_bus_list();
+                foreach ($bus_list as $bus_list) {
+                    echo "<option id='" . $bus_list['destination'] . "' value='" . $bus_list['destination'] . "'>" . $bus_list['destination'] . "</option>";
+                }
+                ?>
+            </select>
+
+            <p>Number of Ticket Need</p>
+            <select id="number">
+                <option disabled>Select</option>
+                <option value="1">+1</option>
+                <option value="2">+2</option>
+                <option value="3">+3</option>
+                <option value="4">+4</option>
+
+            </select><br>
+            <p>Choose Bus Type</p>
+            <input type="radio" id="Ac" name="bus_type" value="Ac">
+            <label for="Ac">AC</label><br>
+            <input type="radio" id="NonAc" name="bus_type" value="NonAc">
+            <label for="Ac">NON AC</label><br>
+
+            <p>Choose Bus</p>
+            <select name="name" id="name">
+                <option selected="" disabled="">Select Bus</option>
+                <?php
+                
+                $bus_list = load_bus_list();
+                foreach ($bus_list as $bus_list) {
+                    echo "<option id='" . $bus_list['name'] . "' value='" . $bus_list['name'] . "'>" . $bus_list['name'] . "</option>";
+                }
+                ?>
+            </select>
+            <br>
+            <input type="reset">
+            <input type="submit" value="Confirm">
+        </form>
+    </div>
+</body>
+
 </html>
