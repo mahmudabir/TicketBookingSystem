@@ -1,14 +1,14 @@
 <?php 
 	require 'busdbconnect.php';
 
-	if(isset($_POST['aid'])) {
+	if(isset($_POST['bid'])) {
 		$db = new busdbconnect;
 		$conn = $db->connect();
 
-		$stmt = $conn->prepare("SELECT * FROM books WHERE author_id = " . $_POST['aid']);
+		$stmt = $conn->prepare("SELECT * FROM bus_list WHERE id = " . $_POST['bid']);
 		$stmt->execute();
-		$books = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		echo json_encode($books);
+		$bus_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($bus_list);
 	}
 
 	function load_bus_list() {

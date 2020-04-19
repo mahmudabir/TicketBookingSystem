@@ -15,7 +15,18 @@ if (!isset($_SESSION['username'])) {
     <link rel="stylesheet" href="bus.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-
+        $(document).ready(function() {
+            $("#board").change(function() {
+                var bid = $("#board").val();
+                $.ajax({
+                    url: 'busdata.php',
+                    method: 'post',
+                    data: 'bid=' + bid
+                }).done(function(bus_list) {
+                    console.log(bus_list);
+                })
+            })
+        })
     </script>
 
     <!--<script>
@@ -63,7 +74,7 @@ if (!isset($_SESSION['username'])) {
                 require 'busdata.php';
                 $bus_list = load_bus_list();
                 foreach ($bus_list as $bus_list) {
-                    echo "<option id='" . $bus_list['board'] . "' value='" . $bus_list['board'] . "'>" . $bus_list['board'] . "</option>";
+                    echo "<option id='" . $bus_list['id'] . "' value='" . $bus_list['id'] . "'>" . $bus_list['board'] . "</option>";
                 }
                 ?>
             </select>
@@ -75,7 +86,7 @@ if (!isset($_SESSION['username'])) {
 
                 $bus_list = load_bus_list();
                 foreach ($bus_list as $bus_list) {
-                    echo "<option id='" . $bus_list['destination'] . "' value='" . $bus_list['destination'] . "'>" . $bus_list['destination'] . "</option>";
+                    echo "<option id='" . $bus_list['id'] . "' value='" . $bus_list['id'] . "'>" . $bus_list['destination'] . "</option>";
                 }
                 ?>
             </select>
@@ -96,15 +107,8 @@ if (!isset($_SESSION['username'])) {
             <label for="Ac">NON AC</label><br>
 
             <p>Choose Bus</p>
-            <select name="name" id="name">
-                <option selected="" disabled="">Select Bus</option>
-                <?php
+            <select name="bus_list" id="bus_list">
                 
-                $bus_list = load_bus_list();
-                foreach ($bus_list as $bus_list) {
-                    echo "<option id='" . $bus_list['name'] . "' value='" . $bus_list['name'] . "'>" . $bus_list['name'] . "</option>";
-                }
-                ?>
             </select>
             <br>
             <input type="reset">
