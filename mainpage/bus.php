@@ -12,7 +12,7 @@
     <head>
         <title></title>
         <link rel="stylesheet" href="bus.css">
-        <script>
+        <!--<script>
             function validate(){
                 var input_from=document.getElementById("from");
                 if(input_from.value == ""){
@@ -40,7 +40,8 @@
                     return false;
                 }
             } 
-        </script>
+        </script>-->
+
     </head>
     <body>
         <div class="box">
