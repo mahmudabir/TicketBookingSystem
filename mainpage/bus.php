@@ -18,13 +18,8 @@ if (!isset($_SESSION['username'])) {
         $(document).ready(function() {
             $("#board").change(function() {
                 var bid = $("#board").val();
-                $.ajax({
-                    url: 'busdata.php',
-                    method: 'post',
-                    data: 'bid=' + bid
-                }).done(function(bus_list) {
-                    console.log(bus_list);
-                })
+                
+                $.ajax({url: 'busdata.php',method: 'post',data: 'bid=' + bid}).done(function(bus_list) {console.log(bus_list);})
             })
         })
     </script>
@@ -74,7 +69,7 @@ if (!isset($_SESSION['username'])) {
                 require 'busdata.php';
                 $bus_list = load_bus_list();
                 foreach ($bus_list as $bus_list) {
-                    echo "<option id='" . $bus_list['id'] . "' value='" . $bus_list['id'] . "'>" . $bus_list['board'] . "</option>";
+                    echo "<option id='" . $bus_list['board'] . "' value='" . $bus_list['board'] . "'>" . $bus_list['board'] . "</option>";
                 }
                 ?>
             </select>
@@ -108,7 +103,7 @@ if (!isset($_SESSION['username'])) {
 
             <p>Choose Bus</p>
             <select name="bus_list" id="bus_list">
-                
+
             </select>
             <br>
             <input type="reset">

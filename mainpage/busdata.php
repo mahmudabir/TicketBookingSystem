@@ -5,7 +5,10 @@
 		$db = new busdbconnect;
 		$conn = $db->connect();
 
-		$stmt = $conn->prepare("SELECT * FROM bus_list WHERE id = " . $_POST['bid']);
+		$board = $_POST['bid']; 
+		//$destination = $_POST['did'];
+		//$stmt = $conn->prepare("SELECT * FROM bus_list WHERE board = '$board' and destination = '$destination' and available_seat > 0 " );
+		$stmt = $conn->prepare("SELECT * FROM bus_list WHERE board = '$board'" );
 		$stmt->execute();
 		$bus_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($bus_list);
