@@ -6,7 +6,27 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../login/login.php");
 }
 
-$slctDes = "disabled";
+$board = $destination = "";
+$boardErr = $destinationErr = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST['board'])) {
+		$boardErr = "Please Select a board location.";
+	} else {
+		$board = $_POST['board'];
+    }
+
+    if (empty($_POST['destination'])) {
+		$destinationErr = "Please Select a destination location.";
+	} else {
+		$destination = $_POST['destination'];
+    }
+    
+    
+
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -22,15 +42,15 @@ $slctDes = "disabled";
                 var bid = $("#board").val();
                 $("#destination").change(function() {
                     var did = $("#destination").val();
-                    //$("#type").change(function() {
-                        //var btype = $("#type").val();
+                    $("#choose_type").change(function() {
+                        var btype = $("#choose_type").val();
                         $.ajax({
                             url: 'busdata.php',
                             method: 'post',
                             data: {
                                 bid: bid,
-                                did: did//,
-                                //btype: btype
+                                did: did,
+                                btype: btype
                             }
                         }).done(function(bus_list) {
                             console.log(bus_list);
@@ -45,21 +65,7 @@ $slctDes = "disabled";
 
                 })
             })
-        //})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        })
 
         function destination_enable() {
             document.getElementById('destination').style.display = 'block';
@@ -69,41 +75,51 @@ $slctDes = "disabled";
             window.location.reload(true);
         }
 
-        function choose_type_enable()
-        {
+        function choose_type_enable() {
             document.getElementById('choose_type').style.display = 'block';
+            document.getElementById('number').style.display = 'block';
+            document.getElementById('number_label').style.display = 'block';
         }
-    </script>
 
-    <!--<script>
-            function validate(){
-                var input_from=document.getElementById("from");
-                if(input_from.value == ""){
-                    alert("Please Enter your city");
-                    return false;
-                }
-                var input_to=document.getElementById("to");
-                if(input_to.value == ""){
-                    alert("Please Enter your Destination city");
-                    return false;
-                }
-                var input_date=document.getElementById("date");
-                if(input_date.value == ""){
-                    alert("Please Pick Date of Journey");
-                    return false;
-                }
-                var input_number=document.getElementById("number");
-                if(input_number.value == ""){
-                    alert("Please Select how many Ticket you need!");
-                    return false;
-                }
-                var input_bus=document.getElementById("bus");
-                if(input_bus.value == ""){
-                    alert("Please Choose a Bus!");
-                    return false;
-                }
-            } 
-        </script>-->
+        /*function validate() {
+            var input_from = document.getElementById("board");
+            if (input_from.value == "") {
+                alert("Please Enter your Board Location");
+                return false;
+            }
+
+            var input_to = document.getElementById("destination");
+            if (input_to.value == "") {
+                alert("Please Enter your Destination city");
+                return false;
+            }
+
+            var input_date = document.getElementById("date");
+            if (input_date.value == "") {
+                alert("Please Pick Date of Journey");
+                return false;
+            }
+
+            var input_number = document.getElementById("number");
+            if (input_number.value == "") {
+                alert("Please Select how many Ticket you need!");
+                return false;
+            }
+
+            var input_number = document.getElementById("choose_type");
+            if (input_number.value == "") {
+                alert("Please Select type of bus you need!");
+                return false;
+            }
+
+
+            var input_bus = document.getElementById("bus");
+            if (input_bus.value == "") {
+                alert("Please Choose a Bus!");
+                return false;
+            }
+        }*/
+    </script>
 
 </head>
 
@@ -125,7 +141,7 @@ $slctDes = "disabled";
                 ?>
             </select>
 
-            <p id="destination_label" style="display: none"  >Destination Location:</p>
+            <p id="destination_label" style="display: none">Destination Location:</p>
             <select name="destination" id="destination" style="display: none" onchange="choose_type_enable()">
                 <option selected="" disabled="">Select City</option>
                 <?php
@@ -137,8 +153,8 @@ $slctDes = "disabled";
                 ?>
             </select>
 
-            <p>Number of Ticket Need</p>
-            <select id="number">
+            <p id="number_label" style="display: none">Number of Ticket Need</p>
+            <select id="number" style="display: none">
                 <option disabled>Select</option>
                 <option value="1">+1</option>
                 <option value="2">+2</option>
@@ -149,18 +165,18 @@ $slctDes = "disabled";
 
 
             <select id="choose_type" style="display: none">
-                    <option   disabled>Select Bus Type</option>
-                    <option id="ac" value="ac">AC</option>
-                    <option value="nonac">Non Ac</option>
+                <option selected="" disabled="">Choose Bus Type</option>
+                <option id="ac" value="ac">AC</option>
+                <option id="nonac" value="nonac">Non Ac</option>
 
-                </select><br>
+            </select><br>
 
             <p>Choose Bus</p>
             <select name="bus_list" id="bus_list">
 
             </select>
             <br>
-            <input type="reset" onclick="reload_page()">
+            <input type="reset" onclick="reset_page()">
             <input type="submit" value="Confirm">
         </form>
     </div>

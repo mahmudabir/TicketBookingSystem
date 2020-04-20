@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2020 at 11:17 PM
+-- Generation Time: Apr 20, 2020 at 10:31 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -33,6 +33,7 @@ CREATE TABLE `bus_list` (
   `name` varchar(100) NOT NULL,
   `board` varchar(100) NOT NULL,
   `destination` varchar(100) NOT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'nonac',
   `available_seat` int(100) NOT NULL DEFAULT 40,
   `total_seat` int(100) NOT NULL DEFAULT 40
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -41,15 +42,29 @@ CREATE TABLE `bus_list` (
 -- Dumping data for table `bus_list`
 --
 
-INSERT INTO `bus_list` (`id`, `name`, `board`, `destination`, `available_seat`, `total_seat`) VALUES
-(1, 'Shonar Bangla', 'Dhaka', 'Sherpur', 40, 40),
-(2, 'Shonar Bangla', 'Sherpur', 'Dhaka', 40, 40),
-(3, 'Hazi', 'Dhaka', 'Sherpur', 40, 40),
-(4, 'Hazi', 'Sherpur', 'Dhaka', 40, 40),
-(5, 'Hanif', 'Dhaka', 'Mymensingh', 40, 40),
-(6, 'Hanif', 'Mymensingh', 'Dhaka', 40, 40),
-(7, 'Ena', 'Dhaka', 'Mymensingh', 40, 40),
-(8, 'Ena', 'Mymensingh', 'Dhaka', 40, 40);
+INSERT INTO `bus_list` (`id`, `name`, `board`, `destination`, `type`, `available_seat`, `total_seat`) VALUES
+(1, 'Shonar Bangla', 'Dhaka', 'Sherpur', 'nonac', 40, 40),
+(2, 'Shonar Bangla', 'Sherpur', 'Dhaka', 'nonac', 40, 40),
+(3, 'Hazi', 'Dhaka', 'Sherpur', 'nonac', 40, 40),
+(4, 'Hazi', 'Sherpur', 'Dhaka', 'nonac', 40, 40),
+(5, 'Hanif', 'Dhaka', 'Mymensingh', 'ac', 40, 40),
+(6, 'Hanif', 'Mymensingh', 'Dhaka', 'ac', 40, 40),
+(7, 'Ena', 'Dhaka', 'Mymensingh', 'nonac', 40, 40),
+(8, 'Ena', 'Mymensingh', 'Dhaka', 'nonac', 40, 40);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history`
+--
+
+CREATE TABLE `history` (
+  `id` int(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `bus_id` int(100) NOT NULL,
+  `seat` int(100) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -90,6 +105,12 @@ ALTER TABLE `bus_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
@@ -105,6 +126,12 @@ ALTER TABLE `login`
 --
 ALTER TABLE `bus_list`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `history`
+--
+ALTER TABLE `history`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `login`

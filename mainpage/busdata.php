@@ -1,13 +1,14 @@
 <?php 
 	require 'busdbconnect.php';
 
-	if(isset($_POST['bid']) && isset($_POST['did'])) {
+	if(isset($_POST['bid']) && isset($_POST['did']) && isset($_POST['btype'])) {
 		$db = new busdbconnect;
 		$conn = $db->connect();
 
 		$board = $_POST['bid']; 
 		$destination = $_POST['did'];
-		$stmt = $conn->prepare("SELECT * FROM bus_list WHERE board = '$board' and destination = '$destination' and available_seat > 0" );
+		$bustype = $_POST['btype'];
+		$stmt = $conn->prepare("SELECT * FROM bus_list WHERE board = '$board' and destination = '$destination' and available_seat > 0 and type = '$bustype' " );
 		$stmt->execute();
 		$bus_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($bus_list);
