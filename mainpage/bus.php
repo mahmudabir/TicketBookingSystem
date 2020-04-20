@@ -18,8 +18,32 @@ if (!isset($_SESSION['username'])) {
         $(document).ready(function() {
             $("#board").change(function() {
                 var bid = $("#board").val();
-                
-                $.ajax({url: 'busdata.php',method: 'post',data: 'bid=' + bid}).done(function(bus_list) {console.log(bus_list);})
+
+                $(document).ready(function() {
+                    $("#destination").change(function() {
+                        var did = $("#destination").val();
+                        var bid = $("#board").val();
+                        $.ajax({
+                            url: 'busdata.php',
+                            method: 'post',
+                            data: {
+                                bid: bid,
+                                did: did
+                            }
+                        }).done(function(bus_list) {
+                            console.log(bus_list);
+                            bus_list = JSON.parse(bus_list);
+                            $('#bus_list').empty();
+                            bus_list.forEach(function(bus_list) {
+                                $('#bus_list').append('<option>' + bus_list.name + '</option>')
+                            })
+
+                        })
+                    })
+                })
+
+
+
             })
         })
     </script>
@@ -81,7 +105,7 @@ if (!isset($_SESSION['username'])) {
 
                 $bus_list = load_bus_list();
                 foreach ($bus_list as $bus_list) {
-                    echo "<option id='" . $bus_list['id'] . "' value='" . $bus_list['id'] . "'>" . $bus_list['destination'] . "</option>";
+                    echo "<option id='" . $bus_list['destination'] . "' value='" . $bus_list['destination'] . "'>" . $bus_list['destination'] . "</option>";
                 }
                 ?>
             </select>
