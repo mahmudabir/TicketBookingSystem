@@ -6,8 +6,8 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../login/login.php");
 }
 
-$board = $destination = "";
-$boardErr = $destinationErr = "";
+$board = $destination = $number = $choose_type = $bus_list = "";
+$boardErr = $destinationErr = $numberErr = $choose_typeErr = $bus_listErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['board'])) {
@@ -21,8 +21,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		$destination = $_POST['destination'];
     }
+
+    if (empty($_POST['number'])) {
+		$numberErr = "Please Select a number of seat.";
+	} else {
+		$number = $_POST['number'];
+    }
+
+    if (empty($_POST['choose_type'])) {
+		$choose_typeErr = "Please Select the type of bus.";
+	} else {
+		$choose_type = $_POST['choose_type'];
+    }
+
+    if (empty($_POST['bus_list'])) {
+		$bus_listErr = "Please Select a destination location.";
+	} else {
+		$bus_list = $_POST['bus_list'];
+    }
+
+    //if(empty($_POST['board']) && empty($_POST['destination']) && empty($_POST['number']) && empty($_POST['choose_type']) && empty($_POST['bus_list']))
+    //{
+    //    $username = $_SESSION['username'];
+    //    $bus_check_sql = "SELECT id from bus_list WHERE name='$bus_list' and board = '$board' and destination = '$destination'";
+    //
+    //}
+
+
+
+
     
-    
+
 
 }
 
@@ -57,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             bus_list = JSON.parse(bus_list);
                             $('#bus_list').empty();
                             bus_list.forEach(function(bus_list) {
-                                $('#bus_list').append('<option>' + bus_list.name + '</option>')
+                                $('#bus_list').append('<option value="' + bus_list.id + '">' + bus_list.name + '</option>')
                             })
                         })
 
