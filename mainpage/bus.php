@@ -91,7 +91,7 @@ if (!isset($_SESSION['username'])) {
                 <option selected="" disabled="">Select City</option>
                 <?php
                 require 'busdata.php';
-                $bus_list = load_bus_list();
+                $bus_list = load_bus_board();
                 foreach ($bus_list as $bus_list) {
                     echo "<option id='" . $bus_list['board'] . "' value='" . $bus_list['board'] . "'>" . $bus_list['board'] . "</option>";
                 }
@@ -103,7 +103,7 @@ if (!isset($_SESSION['username'])) {
                 <option selected="" disabled="">Select City</option>
                 <?php
 
-                $bus_list = load_bus_list();
+                $bus_list = load_bus_destination();
                 foreach ($bus_list as $bus_list) {
                     echo "<option id='" . $bus_list['destination'] . "' value='" . $bus_list['destination'] . "'>" . $bus_list['destination'] . "</option>";
                 }
