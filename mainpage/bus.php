@@ -6,6 +6,8 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../login/login.php");
 }
 
+$slctDes = "disabled";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,17 +20,17 @@ if (!isset($_SESSION['username'])) {
         $(document).ready(function() {
             $("#board").change(function() {
                 var bid = $("#board").val();
-
-                $(document).ready(function() {
-                    $("#destination").change(function() {
-                        var did = $("#destination").val();
-                        var bid = $("#board").val();
+                $("#destination").change(function() {
+                    var did = $("#destination").val();
+                    //$("#type").change(function() {
+                        //var btype = $("#type").val();
                         $.ajax({
                             url: 'busdata.php',
                             method: 'post',
                             data: {
                                 bid: bid,
-                                did: did
+                                did: did//,
+                                //btype: btype
                             }
                         }).done(function(bus_list) {
                             console.log(bus_list);
@@ -37,15 +39,40 @@ if (!isset($_SESSION['username'])) {
                             bus_list.forEach(function(bus_list) {
                                 $('#bus_list').append('<option>' + bus_list.name + '</option>')
                             })
-
                         })
+
                     })
+
                 })
-
-
-
             })
-        })
+        //})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function destination_enable() {
+            document.getElementById('destination').style.display = 'block';
+        }
+
+        function reload_page() {
+            window.location.reload(true);
+        }
+
+        function choose_type_enable()
+        {
+            document.getElementById('choose_type').style.display = 'block';
+        }
     </script>
 
     <!--<script>
@@ -87,7 +114,7 @@ if (!isset($_SESSION['username'])) {
 
             <p>Board Location:</p>
 
-            <select name="board" id="board">
+            <select name="board" id="board" onchange="destination_enable()">
                 <option selected="" disabled="">Select City</option>
                 <?php
                 require 'busdata.php';
@@ -98,8 +125,8 @@ if (!isset($_SESSION['username'])) {
                 ?>
             </select>
 
-            <p>Destination Location:</p>
-            <select name="destination" id="destination">
+            <p id="destination_label" style="display: none"  >Destination Location:</p>
+            <select name="destination" id="destination" style="display: none" onchange="choose_type_enable()">
                 <option selected="" disabled="">Select City</option>
                 <?php
 
@@ -119,18 +146,21 @@ if (!isset($_SESSION['username'])) {
                 <option value="4">+4</option>
 
             </select><br>
-            <p>Choose Bus Type</p>
-            <input type="radio" id="Ac" name="bus_type" value="Ac">
-            <label for="Ac">AC</label><br>
-            <input type="radio" id="NonAc" name="bus_type" value="NonAc">
-            <label for="Ac">NON AC</label><br>
+
+
+            <select id="choose_type" style="display: none">
+                    <option   disabled>Select Bus Type</option>
+                    <option id="ac" value="ac">AC</option>
+                    <option value="nonac">Non Ac</option>
+
+                </select><br>
 
             <p>Choose Bus</p>
             <select name="bus_list" id="bus_list">
 
             </select>
             <br>
-            <input type="reset">
+            <input type="reset" onclick="reload_page()">
             <input type="submit" value="Confirm">
         </form>
     </div>
