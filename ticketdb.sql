@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2020 at 05:13 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Apr 21, 2020 at 08:26 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,6 +25,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bus_history`
+--
+
+CREATE TABLE `bus_history` (
+  `id` int(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `bus_id` int(100) NOT NULL,
+  `seat` int(100) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `payment` int(100) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bus_list`
 --
 
@@ -34,8 +50,8 @@ CREATE TABLE `bus_list` (
   `board` varchar(100) NOT NULL,
   `destination` varchar(100) NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'nonac',
-  `available_seat` int(100) NOT NULL DEFAULT '40',
-  `total_seat` int(100) NOT NULL DEFAULT '40'
+  `available_seat` int(100) NOT NULL DEFAULT 40,
+  `total_seat` int(100) NOT NULL DEFAULT 40
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -55,22 +71,6 @@ INSERT INTO `bus_list` (`id`, `name`, `board`, `destination`, `type`, `available
 -- --------------------------------------------------------
 
 --
--- Table structure for table `history`
---
-
-CREATE TABLE `history` (
-  `id` int(100) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `bus_id` int(100) NOT NULL,
-  `seat` int(100) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `payment` varchar(10) NOT NULL,
-  `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `login`
 --
 
@@ -82,24 +82,34 @@ CREATE TABLE `login` (
   `lastname` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `nid` int(50) NOT NULL,
-  `balance` int(20) NOT NULL DEFAULT '0',
+  `balance` int(20) NOT NULL DEFAULT 0,
   `type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `nid`, `balance`, `type`) VALUES
+(26, 'abir', '$2y$10$X0wNChsxszQ/8xqe6axlH.jqrhzPwd1wdBptAtID1BHoF.e.FpUVG', 'Abir', 'Mahmud', 'amabirmahmud@gmail.com', 1234567890, 0, 'user'),
+(27, 'hasib', '$2y$10$XXzhoIJFhkgZa3iyOtO8jeVXiGqvx.rYVPcB704NOQutdR7hUnINa', 'Hasib', 'Shanto', 'hasibshanto0@gmail.com', 987654321, 0, 'user'),
+(28, 'ayon', '$2y$10$6GBqrMcHWKM701fzl/U7ZugbR9axUDYkXwcler8bPsKGCYn8N93wu', 'Nabil Arman', 'Ayon', 'nabilarmanayon@gmail.com', 2147483647, 0, 'user'),
+(1002, 'mahmud', '$2y$10$WxNzlhcRIOjfNZa52/5ugu8ny06fdUTLfZ8.wSMUQBiFXAKzjeqx6', 'Abir', 'Mahmud', 'mahmud@gmail.com', 12345678, 0, 'user');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `bus_list`
+-- Indexes for table `bus_history`
 --
-ALTER TABLE `bus_list`
+ALTER TABLE `bus_history`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `history`
+-- Indexes for table `bus_list`
 --
-ALTER TABLE `history`
+ALTER TABLE `bus_list`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -114,16 +124,16 @@ ALTER TABLE `login`
 --
 
 --
+-- AUTO_INCREMENT for table `bus_history`
+--
+ALTER TABLE `bus_history`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `bus_list`
 --
 ALTER TABLE `bus_list`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `history`
---
-ALTER TABLE `history`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `login`
