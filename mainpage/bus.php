@@ -68,8 +68,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $payment = $per_seat_cost * $number;
             $sql_insert_into_history = "INSERT INTO bus_history (username, bus_id, seat, payment, status) VALUES ('$username', '$bus_list', '$number', '$payment', 'paid');";
             mysqli_query($conn, $sql_insert_into_history);
-            
             $numberErr = "Successfully booked";
+
+
+            $new_available_seat = $available_seat - $number;
+            $sql_update_available_seat = "UPDATE bus_list SET available_seat='$new_available_seat' WHERE id='$bus_list'";
+            mysqli_query($conn, $sql_update_available_seat);
+
+            
         } else {
             $numberErr = "The number of seat you want is not available";
         }
@@ -132,10 +138,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         function show_cost() {
-            //alert("Per seat cost is " + <?php echo $per_seat_cost; ?>);
-            var v = document.getElementById('bus_list');
-            v = v.options[v.selectedIndex].value;
-            alert(v);
+            
+            
+            
         }
     </script>
 
@@ -190,21 +195,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br>
 
             <p>Choose Bus</p>
-            <select name="bus_list" id="bus_list" onchange="show_cost()">
+            <select name="bus_list" id="bus_list" >
 
             </select>
             <br>
             <input type="reset" onclick="reset_page()">
-            <input type="submit" value="Confirm">
-            <?php //echo $boardErr; ?>
-            <?php //echo $destinationErr; ?>
-            <?php //echo $numberErr; ?>
-            <?php //echo $choose_typeErr; ?>
-            <?php //echo $bus_listErr; ?>
-            <?php //echo $board; ?>
-            <?php //echo $destination; ?>
+            <input type="submit" value="Confirm" id="submit" onclick="show_cost()">
+            <?php echo $numberErr; ?>
             
-            <?php //echo $available_seat; ?>
 
         </form>
     </div>
