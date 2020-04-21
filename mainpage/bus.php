@@ -75,6 +75,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql_update_available_seat = "UPDATE bus_list SET available_seat='$new_available_seat' WHERE id='$bus_list'";
             mysqli_query($conn, $sql_update_available_seat);
 
+
+
+            $board = $destination = $choose_type = $bus_list = "";
+            $number = 0;
             
         } else {
             $numberErr = "The number of seat you want is not available";
@@ -139,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         function show_cost() {
             
-            
+            alert("Cost: "+ <?php echo $payment;?>);
             
         }
     </script>
