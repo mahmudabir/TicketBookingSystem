@@ -28,12 +28,14 @@
                     <th>Status</th>
                 </tr>
                 <?php
-                    $sql = "SELECT id,username,bus_id,seat,date,payment,status";
-                    $result = $conn->query($sql);
-                    if($result->num_row > 0){
-                        while($row =$result -> fetch_assoc())
+                    $sql = "SELECT * from bus_history";
+                    $result = mysqli_query($conn, $sql);
+                    $rowCount = mysqli_num_rows($result);
+
+                    if($rowCount > 0){
+                        while($row = mysqli_fetch_assoc($result))
                         {
-                            echo "<tr><td>".$row["id"]."</td><td>".$row["username"]."</td><td>".$row["bus_id"]."</td><td>".$row["bus_id"]."</td><td>".$row["seat"]."</td><td>".$row["date"]."</td><td>".$row["payment"]."</td><td>".$row[status]."</td><tr>"
+                            echo "<tr><td>".$row['id']."</td><td>".$row['username']."</td><td>".$row['bus_id']."</td><td>".$row['seat']."</td><td>".$row['date']."</td><td>".$row['payment']."</td><td>".$row['status']."</td><tr>";
                         }
                         echo "</table>";
                     }

@@ -1,58 +1,79 @@
 <?php
 include "../mainpage/common.inc.php";
 include "../db/db_connect.inc.php";
+
 session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: ../login/login.php");
 }
 
-$board = $destination = $number = $choose_type = $bus_list = "";
+$board = $destination  = $choose_type = $bus_list = "";
 $boardErr = $destinationErr = $numberErr = $choose_typeErr = $bus_listErr = "";
 
+$payment = $per_seat_cost = $number = $number = $seat = $chosen_number = $available_seat = 0;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    //$payment = $per_seat_cost = $number = $number = $seat = $chosen_number = 0;
+
     if (empty($_POST['board'])) {
-		$boardErr = "Please Select a board location.";
-	} else {
-		$board = $_POST['board'];
+        $boardErr = "Please Select a board location.";
+    } else {
+        $board = $_POST['board'];
     }
 
     if (empty($_POST['destination'])) {
-		$destinationErr = "Please Select a destination location.";
-	} else {
-		$destination = $_POST['destination'];
-    }
-
-    if (empty($_POST['number'])) {
-		$numberErr = "Please Select a number of seat.";
-	} else {
-		$number = $_POST['number'];
+        $destinationErr = "Please Select a destination location.";
+    } else {
+        $destination = $_POST['destination'];
     }
 
     if (empty($_POST['choose_type'])) {
-		$choose_typeErr = "Please Select the type of bus.";
-	} else {
-		$choose_type = $_POST['choose_type'];
+        $choose_typeErr = "Please Select the type of bus.";
+    } else {
+        $choose_type = $_POST['choose_type'];
     }
 
     if (empty($_POST['bus_list'])) {
-		$bus_listErr = "Please Select a destination location.";
-	} else {
-		$bus_list = $_POST['bus_list'];
+        $bus_listErr = "Please Select a destination location.";
+    } else {
+        $bus_list = $_POST['bus_list'];
     }
 
-    //if(empty($_POST['board']) && empty($_POST['destination']) && empty($_POST['number']) && empty($_POST['choose_type']) && empty($_POST['bus_list']))
-    //{
-    //    $username = $_SESSION['username'];
-    //    $bus_check_sql = "SELECT id from bus_list WHERE name='$bus_list' and board = '$board' and destination = '$destination'";
-    //
-    //}
+    if (empty($_POST['number'])) {
+        $numberErr = "Please Select a number of seat.";
+    } else {
+    }
 
+    if (!empty($_POST['board']) && !empty($_POST['destination']) && !empty($_POST['number']) && !empty($_POST['choose_type']) && !empty($_POST['bus_list'])) {
+        $chosen_number = $_POST['number'];
+        $sql_seat_check = "SELECT available_seat FROM bus_list WHERE id='$bus_list' and board = '$board' and destination = '$destination'";
+        $seat = mysqli_query($conn, $sql_seat_check);
 
+        while ($row = mysqli_fetch_assoc($seat)) {
+            $available_seat = $row['available_seat'];
+        }
 
+        if ($available_seat >= $chosen_number) {
+            $number = $chosen_number;
 
-    
+            $username = $_SESSION['username'];
+            $sql_bus_check = "SELECT id, cost from bus_list WHERE id='$bus_list' and board = '$board' and destination = '$destination'";
+            $result = mysqli_query($conn, $sql_bus_check);
 
-
+            while ($row = mysqli_fetch_assoc($result)) {
+                //$bIdInDB = $row['id'];
+                $per_seat_cost = $row['cost'];
+            }
+            $payment = $per_seat_cost * $number;
+            $sql_insert_into_history = "INSERT INTO bus_history (username, bus_id, seat, payment, status) VALUES ('$username', '$bus_list', '$number', '$payment', 'paid');";
+            mysqli_query($conn, $sql_insert_into_history);
+            
+            $numberErr = "Successfully booked";
+        } else {
+            $numberErr = "The number of seat you want is not available";
+        }
+    }
 }
 
 
@@ -100,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById('destination').style.display = 'block';
         }
 
-        function reload_page() {
+        function reset_page() {
             window.location.reload(true);
         }
 
@@ -110,44 +131,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById('number_label').style.display = 'block';
         }
 
-        /*function validate() {
-            var input_from = document.getElementById("board");
-            if (input_from.value == "") {
-                alert("Please Enter your Board Location");
-                return false;
-            }
-
-            var input_to = document.getElementById("destination");
-            if (input_to.value == "") {
-                alert("Please Enter your Destination city");
-                return false;
-            }
-
-            var input_date = document.getElementById("date");
-            if (input_date.value == "") {
-                alert("Please Pick Date of Journey");
-                return false;
-            }
-
-            var input_number = document.getElementById("number");
-            if (input_number.value == "") {
-                alert("Please Select how many Ticket you need!");
-                return false;
-            }
-
-            var input_number = document.getElementById("choose_type");
-            if (input_number.value == "") {
-                alert("Please Select type of bus you need!");
-                return false;
-            }
-
-
-            var input_bus = document.getElementById("bus");
-            if (input_bus.value == "") {
-                alert("Please Choose a Bus!");
-                return false;
-            }
-        }*/
+        function show_cost() {
+            //alert("Per seat cost is " + <?php echo $per_seat_cost; ?>);
+            var v = document.getElementById('bus_list');
+            v = v.options[v.selectedIndex].value;
+            alert(v);
+        }
     </script>
 
 </head>
@@ -183,8 +172,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
 
             <p id="number_label" style="display: none">Number of Ticket Need</p>
-            <select id="number" style="display: none">
-                <option disabled>Select</option>
+            <select id="number" name="number" style="display: none">
+                <option disabled="">Select</option>
                 <option value="1">+1</option>
                 <option value="2">+2</option>
                 <option value="3">+3</option>
@@ -193,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br>
 
 
-            <select id="choose_type" style="display: none">
+            <select id="choose_type" name="choose_type" style="display: none">
                 <option selected="" disabled="">Choose Bus Type</option>
                 <option id="ac" value="ac">AC</option>
                 <option id="nonac" value="nonac">Non Ac</option>
@@ -201,12 +190,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br>
 
             <p>Choose Bus</p>
-            <select name="bus_list" id="bus_list">
+            <select name="bus_list" id="bus_list" onchange="show_cost()">
 
             </select>
             <br>
             <input type="reset" onclick="reset_page()">
             <input type="submit" value="Confirm">
+            <?php //echo $boardErr; ?>
+            <?php //echo $destinationErr; ?>
+            <?php //echo $numberErr; ?>
+            <?php //echo $choose_typeErr; ?>
+            <?php //echo $bus_listErr; ?>
+            <?php //echo $board; ?>
+            <?php //echo $destination; ?>
+            
+            <?php //echo $available_seat; ?>
+
         </form>
     </div>
 </body>
