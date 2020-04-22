@@ -170,29 +170,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             window.location.reload();
         }
 
-        function fetch_cost(){
-
+        function fetch_cost(str, number) {
+            var xhttp;
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("txtHint").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "buscostget.php?q=" + str + "&r=" + number, true);
+            xhttp.send();
         }
 
-
-        function show_total_cost() {
-            fetch_cost();
-            
-            
-
-            alert("Per Seat Cost: " );
-
-        }
-
-        function show_per_seat_cost(){
-            fetch_cost();
-
-
-
-
-            alert("Total Cost: " );
-
-
+        function show_per_seat_cost(str, number) {
+            fetch_cost(str, number);
         }
     </script>
 
@@ -217,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
 
             <p id="destination_label" style="display: none">Destination Location:</p>
-            <select name="destination" id="destination" style="display: none" onchange="destination_change()">
+            <select name="destination" id="destination" style="display: none" onchange="destination_change('', '')">
                 <option selected="" disabled="">Select City</option>
                 <?php
 
@@ -248,12 +243,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br>
 
             <p>Choose Bus</p>
-            <select name="bus_list" id="bus_list" onchange="show_per_seat_cost()">
-
+            <select name="bus_list" id="bus_list" onclick="show_per_seat_cost(this.value, number.value)">
+                <option selected="" disabled="">Select Bus</option>
             </select>
             <br>
+
+            <div style="color: green" id="txtHint">You will see Per seat cost & Total cost here.</div><br>
+
+
             <input type="button" Value="Reset" onclick="reset_page()">
-            <input type="submit" value="Confirm" id="submit" onclick="show_total_cost()">
+            <input type="submit" value="Confirm" id="submit">
             <p style="color: yellow"><?php echo $numberErr; ?></p><br>
             <p style="color: red"><?php echo $destinationErr; ?></p>
 
