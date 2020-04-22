@@ -196,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="box">
         <h1>Ticket booking here</h1>
-        <form action="mainpage.php" method="post">
+        <form action="bus.php" method="post">
 
             <p id="board_label">Board Location:</p>
 
@@ -225,7 +225,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <p id="number_label" style="display: none">Number of Ticket Need</p>
             <select id="number" name="number" style="display: none">
-                <option disabled="">Select</option>
+                <option disabled="" selected="">Select</option>
                 <option value="1">+1</option>
                 <option value="2">+2</option>
                 <option value="3">+3</option>
@@ -254,7 +254,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="button" Value="Reset" onclick="reset_page()">
             <input type="submit" value="Confirm" id="submit">
             <p style="color: yellow"><?php echo $numberErr; ?></p><br>
-            <p style="color: red"><?php echo $destinationErr; ?></p>
+            <p style="color: yellow"><?php echo $destinationErr; ?></p>
+            <p style="color: yellow"><?php echo $choose_typeErr; ?></p>
+            
 
 
         </form>
