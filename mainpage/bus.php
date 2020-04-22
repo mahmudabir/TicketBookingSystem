@@ -22,7 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['destination'])) {
         $destinationErr = "Please Select a destination location.";
     } else {
-        $destination = $_POST['destination'];
+        if ($board == $_POST['destination']) {
+            $destinationErr = "Board & destination Location cannot be same.";
+        } else {
+            $destination = $_POST['destination'];
+        }
     }
 
     if (empty($_POST['choose_type'])) {
@@ -143,23 +147,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             })
         })
 
-        function destination_enable() {
+        function board_change() {
             document.getElementById('destination').style.display = 'block';
+            document.getElementById('destination_label').style.display = 'block';
+
+            document.getElementById('board').style.display = 'none';
+            document.getElementById('board_label').style.display = 'none';
+        }
+
+        function destination_change() {
+            document.getElementById('number').style.display = 'block';
+            document.getElementById('number_label').style.display = 'block';
+
+            document.getElementById('choose_type').style.display = 'block';
+            document.getElementById('choose_type_label').style.display = 'block';
+
+            document.getElementById('destination').style.display = 'none';
+            document.getElementById('destination_label').style.display = 'none';
         }
 
         function reset_page() {
             window.location.reload();
         }
 
-        function choose_type_enable() {
-            document.getElementById('choose_type').style.display = 'block';
-            document.getElementById('number').style.display = 'block';
-            document.getElementById('number_label').style.display = 'block';
+        function fetch_cost(){
+
         }
 
-        function show_cost() {
 
-            alert("Cost: " + <?php echo $payment; ?>);
+        function show_total_cost() {
+            fetch_cost();
+            
+            
+
+            alert("Per Seat Cost: " );
+
+        }
+
+        function show_per_seat_cost(){
+            fetch_cost();
+
+
+
+
+            alert("Total Cost: " );
+
 
         }
     </script>
@@ -171,9 +203,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Ticket booking here</h1>
         <form action="bus.php" method="post">
 
-            <p>Board Location:</p>
+            <p id="board_label">Board Location:</p>
 
-            <select name="board" id="board" onchange="destination_enable()">
+            <select name="board" id="board" onchange="board_change()">
                 <option selected="" disabled="">Select City</option>
                 <?php
                 require 'busdata.php';
@@ -185,7 +217,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
 
             <p id="destination_label" style="display: none">Destination Location:</p>
-            <select name="destination" id="destination" style="display: none" onchange="choose_type_enable()">
+            <select name="destination" id="destination" style="display: none" onchange="destination_change()">
                 <option selected="" disabled="">Select City</option>
                 <?php
 
@@ -207,6 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br>
 
 
+            <p id="choose_type_label" style="display: none">Number of Ticket Need</p>
             <select id="choose_type" name="choose_type" style="display: none">
                 <option selected="" disabled="">Choose Bus Type</option>
                 <option id="ac" value="ac">AC</option>
@@ -215,13 +248,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br>
 
             <p>Choose Bus</p>
-            <select name="bus_list" id="bus_list">
+            <select name="bus_list" id="bus_list" onchange="show_per_seat_cost()">
 
             </select>
             <br>
             <input type="button" Value="Reset" onclick="reset_page()">
-            <input type="submit" value="Confirm" id="submit" onclick="show_cost()">
-            <?php echo $numberErr; ?>
+            <input type="submit" value="Confirm" id="submit" onclick="show_total_cost()">
+            <p style="color: yellow"><?php echo $numberErr; ?></p><br>
+            <p style="color: red"><?php echo $destinationErr; ?></p>
 
 
         </form>
