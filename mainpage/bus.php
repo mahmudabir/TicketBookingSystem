@@ -10,12 +10,9 @@ if (!isset($_SESSION['username'])) {
 $board = $destination  = $choose_type = $bus_list = "";
 $boardErr = $destinationErr = $numberErr = $choose_typeErr = $bus_listErr = "";
 
-$payment = $per_seat_cost = $number = $number = $seat = $chosen_number = $available_seat = 0;
+$payment = $per_seat_cost = $number = $number = $seat = $chosen_number = $available_seat = $balance = $new_balance = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    //$payment = $per_seat_cost = $number = $number = $seat = $chosen_number = 0;
-
     if (empty($_POST['board'])) {
         $boardErr = "Please Select a board location.";
     } else {
@@ -66,20 +63,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $per_seat_cost = $row['cost'];
             }
             $payment = $per_seat_cost * $number;
-            $sql_insert_into_history = "INSERT INTO bus_history (username, bus_id, seat, payment, status) VALUES ('$username', '$bus_list', '$number', '$payment', 'paid');";
-            mysqli_query($conn, $sql_insert_into_history);
-            $numberErr = "Successfully booked";
+
+            //checking user balance
+            $sql_balance_check = "SELECT balance from login WHERE username='$username'";
+            $balance_result = mysqli_query($conn, $sql_balance_check);
+
+            while ($row = mysqli_fetch_assoc($balance_result)) {
+                $balance = $row['balance'];
+            }
+
+            if ($balance >= $payment) {
+                //insert into bus history table
+                $sql_insert_into_history = "INSERT INTO bus_history (username, bus_id, seat, payment, status) VALUES ('$username', '$bus_list', '$number', '$payment', 'paid');";
+                mysqli_query($conn, $sql_insert_into_history);
+
+                $new_balance = $balance - $payment;
+
+                //updating balance after successfull ticket booking
+                $sql_update_balance = "UPDATE login SET balance='$new_balance' WHERE username='$username'";
+                mysqli_query($conn, $sql_update_balance);
 
 
-            $new_available_seat = $available_seat - $number;
-            $sql_update_available_seat = "UPDATE bus_list SET available_seat='$new_available_seat' WHERE id='$bus_list'";
-            mysqli_query($conn, $sql_update_available_seat);
+                //updating available seat number
+                $new_available_seat = $available_seat - $number;
+                $sql_update_available_seat = "UPDATE bus_list SET available_seat='$new_available_seat' WHERE id='$bus_list'";
+                mysqli_query($conn, $sql_update_available_seat);
 
 
-
-            $board = $destination = $choose_type = $bus_list = "";
-            $number = 0;
-            
+                $numberErr = "Successfully booked";
+                $board = $destination = $choose_type = $bus_list = "";
+                $number = 0;
+            } else {
+                $numberErr = "You don't have sufficient balance";
+            }
         } else {
             $numberErr = "The number of seat you want is not available";
         }
@@ -142,9 +158,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         function show_cost() {
-            
-            alert("Cost: "+ <?php echo $payment;?>);
-            
+
+            alert("Cost: " + <?php echo $payment; ?>);
+
         }
     </script>
 
@@ -199,14 +215,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br>
 
             <p>Choose Bus</p>
-            <select name="bus_list" id="bus_list" >
+            <select name="bus_list" id="bus_list">
 
             </select>
             <br>
             <input type="button" Value="Reset" onclick="reset_page()">
             <input type="submit" value="Confirm" id="submit" onclick="show_cost()">
             <?php echo $numberErr; ?>
-            
+
 
         </form>
     </div>
