@@ -196,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="box">
         <h1>Ticket booking here</h1>
-        <form action="bus.php" method="post">
+        <form action="mainpage.php" method="post">
 
             <p id="board_label">Board Location:</p>
 
