@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         function reset_page() {
-            window.location.reload(true);
+            window.location.reload();
         }
 
         function choose_type_enable() {
@@ -203,7 +203,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </select>
             <br>
-            <input type="reset" onclick="reset_page()">
+            <input type="button" Value="Reset" onclick="reset_page()">
             <input type="submit" value="Confirm" id="submit" onclick="show_cost()">
             <?php echo $numberErr; ?>
             
