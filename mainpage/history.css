@@ -6,8 +6,8 @@ body {
 }
 
 .table{
-    width: 700px;
-	height: 620px;
+    width: 900px;
+	height: 680px;
 	background: #fff;
 	top:50%;
 	left: 50%;
@@ -21,7 +21,73 @@ h1{
     margin: 0;
 	padding: 0 0 20px;
 	text-align: center;
-	font-size: 38px;
+    font-size: 38px;
+    color: #009879;
+}
+.table > input,
+.table section >div{
+    display: none;
+}
+#tab1:checked~section .tab1,
+#tab2:checked~section .tab2,
+#tab3:checked~section .tab3{
+    display: block;
+}
+*,* : after ,*:before{
+    box-sizing:border-box;
+}
+.table ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.table ul li label{
+    float: left;
+    padding: 15px 25px;
+    border: 1px solid #ddd;
+    border-bottom: 0;
+    background-color: #eeeeee;
+    color: #444;
+}
+.table ul li label:hover{
+    background-color: #ddd;
+}
+.table ul li label:active{
+    background-color: #fff;
+}
+.table ul li:not(:last-child)label{
+    border-right-width: 0;
+}
+.table section{
+    clear: both;
+} 
+.table section div{
+    padding: 20px;
+    width: 100%;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    
+    color: #444;
+    
+}
+#tab1:checked~nav .tab1 label,
+#tab2:checked~nav .tab2 label,
+#tab3:checked~nav .tab3 label{
+    background-color: #fff;
+    color: #111;
+    position: relative;
+}
+#tab1:checked~nav .tab1 label:after
+#tab2:checked~nav .tab2 label:after,
+#tab3:checked~nav .tab3 label:after{
+    content: "";
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: #fff;
+    left: 0;
+    bottom: -1px;
 }
 
 .content-table{
