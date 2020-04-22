@@ -28,7 +28,8 @@
 					<li><a href="../adminpage/logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
 				</ul></li>
 				<li><a href="../adminpage/bus.php"><i class="fas fa-bus"></i>Bus</a></li>
-				<li><a href="../adminpage/train.php"><i class="fas fa-train"></i>Train</a></li>
+				<li><a href="../adminpage/train.php"><i class="fas fa-train"></i>Train</a></li>-->
+				
 				<li><a href="../adminpage/launch.php"><i class="fas fa-ship"></i>Launch</a></li>
 			</ul>
 			<div class="social_media">

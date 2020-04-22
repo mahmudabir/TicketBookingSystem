@@ -3,7 +3,7 @@
 include "../db/db_connect.inc.php";
 
 session_start();
-$username = $password = "";
+$username = $password = $type = "";
 $usernameErr = $passwordErr = $message = $result = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$password =  mysqli_real_escape_string($conn, $_POST['password']);
 	}
 
-	$sqlUserCheck = "SELECT username, password FROM login WHERE username = '$username'";
+	$sqlUserCheck = "SELECT username, password, type FROM login WHERE username = '$username'";
 	$result = mysqli_query($conn, $sqlUserCheck);
 	$rowCount = mysqli_num_rows($result);
 
@@ -28,15 +28,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		while ($row = mysqli_fetch_assoc($result)) {
 			$uPassInDB = $row['password'];
-
-			if (password_verify($password, $uPassInDB)) {
-				$_SESSION['username'] = $username;
-				//$message = "Password Matched!";
-				header("Location: ../mainpage/mainpage.php");
-			} else {
-				$message = "Wrong Password!";
-			}
+			$type = $row['type'];
 		}
+
+		if ((password_verify($password, $uPassInDB)) && ($type == "user")) {
+			$_SESSION['username'] = $username;
+			//$message = "Password Matched!";
+			//header("Location: ../mainpage/mainpage.php");
+		} else if ((password_verify($password, $uPassInDB)) && ($type == "admin")) {
+			$_SESSION['username'] = $username;
+			header("Location: ../adminpage/main.php");
+		} else if ((password_verify($password, $uPassInDB)) && ($type == "superadmin")) {
+			$_SESSION['username'] = $username;
+			header("Location: ../superadminpage/main.php");
+		} else {
+			$message = "Wrong Password!";
+		}
+
+		/*if (password_verify($password, $uPassInDB)) {
+			$_SESSION['username'] = $username;
+			//$message = "Password Matched!";
+			header("Location: ../mainpage/mainpage.php");
+		} else {
+			$message = "Wrong Password!";
+		}*/
 	}
 }
 ?>
