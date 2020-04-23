@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2020 at 03:54 PM
+-- Generation Time: Apr 23, 2020 at 11:41 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -107,7 +107,43 @@ INSERT INTO `bus_history` (`id`, `username`, `bus_id`, `seat`, `date`, `payment`
 (64, 'abir', 3, 1, '2020-04-22 10:56:40', 300, 'paid'),
 (65, 'abir', 3, 1, '2020-04-22 10:56:47', 300, 'paid'),
 (66, 'mahmud', 3, 3, '2020-04-22 11:30:47', 900, 'paid'),
-(67, 'abir', 1, 3, '2020-04-22 11:42:58', 900, 'paid');
+(67, 'abir', 1, 3, '2020-04-22 11:42:58', 900, 'paid'),
+(68, 'abir', 3, 2, '2020-04-22 14:16:48', 600, 'paid'),
+(69, 'abir', 3, 4, '2020-04-22 14:53:02', 1200, 'paid'),
+(70, 'abir', 5, 4, '2020-04-22 15:02:31', 1400, 'paid'),
+(71, 'abir', 5, 4, '2020-04-22 15:06:59', 1400, 'paid'),
+(72, 'abir', 1, 1, '2020-04-22 15:07:07', 300, 'paid'),
+(73, 'abir', 3, 4, '2020-04-22 15:07:34', 1200, 'paid'),
+(74, 'abir', 5, 1, '2020-04-22 15:07:47', 350, 'paid'),
+(75, 'abir', 5, 1, '2020-04-22 15:09:27', 350, 'paid'),
+(76, 'abir', 3, 1, '2020-04-22 15:09:35', 300, 'paid'),
+(77, 'abir', 1, 1, '2020-04-22 15:10:04', 300, 'paid'),
+(78, 'abir', 1, 1, '2020-04-22 15:11:11', 300, 'paid'),
+(79, 'abir', 1, 4, '2020-04-22 15:11:19', 1200, 'paid'),
+(80, 'abir', 1, 1, '2020-04-22 15:11:54', 300, 'paid'),
+(81, 'abir', 1, 1, '2020-04-22 15:12:54', 300, 'paid'),
+(82, 'abir', 1, 1, '2020-04-22 15:13:17', 300, 'paid'),
+(83, 'abir', 3, 1, '2020-04-22 15:14:23', 300, 'paid'),
+(84, 'abir', 7, 1, '2020-04-22 15:22:07', 220, 'paid'),
+(85, 'abir', 7, 1, '2020-04-22 15:37:36', 220, 'paid'),
+(86, 'abir', 7, 3, '2020-04-22 18:16:54', 660, 'paid'),
+(87, 'abir', 7, 3, '2020-04-22 18:17:09', 660, 'paid'),
+(88, 'abir', 7, 3, '2020-04-22 18:19:46', 660, 'paid'),
+(89, 'abir', 7, 3, '2020-04-22 18:20:29', 660, 'paid'),
+(90, 'abir', 7, 1, '2020-04-22 18:25:27', 220, 'paid'),
+(91, 'abir', 7, 1, '2020-04-22 18:58:52', 220, 'paid'),
+(92, 'abir', 7, 3, '2020-04-22 19:01:10', 660, 'paid'),
+(93, 'abir', 7, 3, '2020-04-22 19:01:13', 660, 'paid'),
+(94, 'abir', 7, 3, '2020-04-22 19:01:59', 660, 'paid'),
+(95, 'abir', 7, 3, '2020-04-22 19:02:00', 660, 'paid'),
+(96, 'abir', 7, 3, '2020-04-22 19:02:00', 660, 'paid'),
+(97, 'abir', 1, 2, '2020-04-22 19:02:23', 600, 'paid'),
+(98, 'abir', 1, 2, '2020-04-22 19:02:32', 600, 'paid'),
+(99, 'abir', 1, 2, '2020-04-22 19:02:34', 600, 'paid'),
+(100, 'abir', 1, 2, '2020-04-22 19:03:22', 600, 'paid'),
+(101, 'abir', 5, 2, '2020-04-22 19:04:56', 700, 'paid'),
+(102, 'abir', 5, 2, '2020-04-22 19:05:15', 700, 'paid'),
+(103, 'abir', 5, 2, '2020-04-22 19:27:29', 700, 'paid');
 
 -- --------------------------------------------------------
 
@@ -131,14 +167,47 @@ CREATE TABLE `bus_list` (
 --
 
 INSERT INTO `bus_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, `available_seat`, `total_seat`) VALUES
-(1, 'Shonar Bangla', 'Dhaka', 'Sherpur', 'nonac', 300, 37, 40),
+(1, 'Shonar Bangla', 'Dhaka', 'Sherpur', 'nonac', 300, 19, 40),
 (2, 'Shonar Bangla', 'Sherpur', 'Dhaka', 'nonac', 300, 40, 40),
-(3, 'Hazi', 'Dhaka', 'Sherpur', 'nonac', 300, 40, 40),
+(3, 'Hazi', 'Dhaka', 'Sherpur', 'nonac', 300, 28, 40),
 (4, 'Hazi', 'Sherpur', 'Dhaka', 'nonac', 300, 40, 40),
-(5, 'Hanif', 'Dhaka', 'Mymensingh', 'ac', 350, 40, 40),
+(5, 'Hanif', 'Dhaka', 'Mymensingh', 'ac', 350, 24, 40),
 (6, 'Hanif', 'Mymensingh', 'Dhaka', 'ac', 350, 40, 40),
-(7, 'Ena', 'Dhaka', 'Mymensingh', 'nonac', 220, 40, 40),
+(7, 'Ena', 'Dhaka', 'Mymensingh', 'nonac', 220, 9, 40),
 (8, 'Ena', 'Mymensingh', 'Dhaka', 'nonac', 220, 40, 40);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `launch_history`
+--
+
+CREATE TABLE `launch_history` (
+  `id` int(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `launch_id` int(100) NOT NULL,
+  `seat` int(100) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `payment` int(100) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `launch_list`
+--
+
+CREATE TABLE `launch_list` (
+  `id` int(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `board` varchar(100) NOT NULL,
+  `destination` varchar(100) NOT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'nonac',
+  `cost` int(100) NOT NULL,
+  `available_seat` int(100) NOT NULL DEFAULT 240,
+  `total_seat` int(100) NOT NULL DEFAULT 240
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -163,10 +232,62 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `nid`, `balance`, `type`) VALUES
-(26, 'abir', '$2y$10$X0wNChsxszQ/8xqe6axlH.jqrhzPwd1wdBptAtID1BHoF.e.FpUVG', 'Abir', 'Mahmud', 'amabirmahmud@gmail.com', '1234567890357890897654323456789', 2147483647, 'user'),
+(26, 'abir', '$2y$10$X0wNChsxszQ/8xqe6axlH.jqrhzPwd1wdBptAtID1BHoF.e.FpUVG', 'Abir', 'Mahmud', 'amabirmahmud@gmail.com', '1234567890357890897654323456789', 2147461327, 'user'),
 (27, 'hasib', '$2y$10$XXzhoIJFhkgZa3iyOtO8jeVXiGqvx.rYVPcB704NOQutdR7hUnINa', 'Hasib', 'Shanto', 'hasibshanto0@gmail.com', '987654321', 2147483647, 'user'),
 (28, 'ayon', '$2y$10$6GBqrMcHWKM701fzl/U7ZugbR9axUDYkXwcler8bPsKGCYn8N93wu', 'Nabil Arman', 'Ayon', 'nabilarmanayon@gmail.com', '3214567', 2147483647, 'user'),
 (1003, 'mahmud', '$2y$10$QWQutDEI1HegmOwd/9ppJuMlNSUsytHrvC3WnXjujSEQL0zBsLCk2', 'Abir', 'Mahmud', 'asdas@asdasd', '2147483647', 2147482747, 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `train_history`
+--
+
+CREATE TABLE `train_history` (
+  `id` int(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `train_id` int(100) NOT NULL,
+  `seat` int(100) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `payment` int(100) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `train_history`
+--
+
+INSERT INTO `train_history` (`id`, `username`, `train_id`, `seat`, `date`, `payment`, `status`) VALUES
+(1, 'abir', 4, 3, '2020-04-23 04:31:51', 900, 'paid');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `train_list`
+--
+
+CREATE TABLE `train_list` (
+  `id` int(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `board` varchar(100) NOT NULL,
+  `destination` varchar(100) NOT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'nonac',
+  `cost` int(100) NOT NULL,
+  `available_seat` int(100) NOT NULL DEFAULT 240,
+  `total_seat` int(100) NOT NULL DEFAULT 240
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `train_list`
+--
+
+INSERT INTO `train_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, `available_seat`, `total_seat`) VALUES
+(1, 'Agnibina', 'Dhaka', 'Tarakandi', 'nonac', 150, 240, 240),
+(2, 'Agnibina', 'Tarakandi', 'Dhaka', 'nonac', 150, 240, 240),
+(3, 'Trina', 'Dhaka', 'Chittagong', 'nonac', 300, 240, 240),
+(4, 'Trina', 'Chittagong', 'Dhaka', 'nonac', 300, 237, 240),
+(5, 'Shuborno Express', 'Dhaka', 'Chittagong', 'ac', 400, 240, 240),
+(6, 'Shuborno Express', 'Chittagong', 'Dhaka', 'ac', 400, 240, 240);
 
 --
 -- Indexes for dumped tables
@@ -185,11 +306,35 @@ ALTER TABLE `bus_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `launch_history`
+--
+ALTER TABLE `launch_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `launch_list`
+--
+ALTER TABLE `launch_list`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `train_history`
+--
+ALTER TABLE `train_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `train_list`
+--
+ALTER TABLE `train_list`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -199,7 +344,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `bus_history`
 --
 ALTER TABLE `bus_history`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `bus_list`
@@ -208,10 +353,34 @@ ALTER TABLE `bus_list`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `launch_history`
+--
+ALTER TABLE `launch_history`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `launch_list`
+--
+ALTER TABLE `launch_list`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1004;
+
+--
+-- AUTO_INCREMENT for table `train_history`
+--
+ALTER TABLE `train_history`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `train_list`
+--
+ALTER TABLE `train_list`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
