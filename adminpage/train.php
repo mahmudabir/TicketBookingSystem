@@ -1,17 +1,18 @@
 <?php
-    include "../superadminpage/common.inc.php";
-    session_start();
-    if (!isset($_SESSION['username'])) {
-        header("Location: ../login/login.php");
-    }
+    include "../adminpage/common.inc.php";
 
+    /*session_start();
+
+if (!isset($_SESSION['username'])) {
+	header("Location: ../login/login.php");
+}*/
 
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title></title>
-        <link rel="stylesheet" href="launch.css">
+        <link rel="stylesheet" href="train.css">
         <script>
             function validate(){
                 var input_from=document.getElementById("from");
@@ -34,9 +35,9 @@
                     alert("Please Select how many Ticket you need!");
                     return false;
                 }
-                var input_bus=document.getElementById("launch");
+                var input_bus=document.getElementById("train");
                 if(input_bus.value == ""){
-                    alert("Please Choose a Bus!");
+                    alert("Please Choose a train!");
                     return false;
                 }
             } 
@@ -45,22 +46,18 @@
     <body>
         <div class="box">
             <h1>Ticket booking here</h1>
-            <form action="launch.php" method="post" onsubmit="return validate();">
+            <form action="train.php" method="post" onsubmit="return validate();">
                 <p>Enter City</p>
                 <select name="" id="from">
                     <option disabled>Enter city</option>
                     <option value="Dhaka">Dhaka</option>
-                    <option value="Barisal">Barisal</option>
-                    <option value="Sundorban">Sundorban</option>
-                    <option value="Kuwakata">Kuwakata</option>
+                    <option value="Chittagong">Chittagong</option>
                 </select>
                 <p>TO</p>
                 <select name="" id="to">
                     <option disabled>Enter city</option>
+                    <option value="Chittagong">Chittagong</option>
                     <option value="Dhaka">Dhaka</option>
-                    <option value="Barisal">Barisal</option>
-                    <option value="Sundorban">Sundorban</option>
-                    <option value="Kuwakata">Kuwakata</option>
                 </select>
                 <p>Date of Journey</p>
                 <input type="date" name="date" placeholder="Pick a date" id="date"><br>
@@ -73,16 +70,16 @@
                     <option value="4">+4</option>
 
                 </select><br>
-                <p>Choose Launch Type</p>
+                <p>Choose Buggy Type</p>
                 <input type="radio" id="Ac" name="bus_type" value="Ac">
                 <label for="Ac">AC</label><br>
                 <input type="radio" id="NonAc" name="bus_type" value="NonAc">
                 <label for="Ac">NON AC</label><br>
-                <p>Choose Launch</p>
-                <select id="launch">
+                <p>Choose Train</p>
+                <select id="train">
                 <option value="void" disabled>Choose one</option>
-                    <option value="Greenline">Green Line</option>
-                    <option value="Surovi">Surovi</option>
+                    <option value="Sonar_Bangla">Sonar Bangla Express</option>
+                    <option value="Suborno">Suborno Express</option>
 
                 </select><br>
                 <input type="reset">

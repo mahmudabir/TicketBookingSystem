@@ -1,5 +1,5 @@
 <?php
-    include "../superadminpage/common.inc.php";
+    include "../adminpage/common.inc.php";
     session_start();
     if (!isset($_SESSION['username'])) {
         header("Location: ../login/login.php");

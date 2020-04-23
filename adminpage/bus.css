@@ -1,0 +1,91 @@
+body {
+	margin:0;
+	padding:0;
+	background: url(bus.jpeg);
+	background-size:cover;
+	font-family: sans-serif;
+}
+.box{
+	width: 380px;
+	height: 620px;
+	background: #000;
+	color: #fff;
+	top:50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50% ,-50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+}
+h1{
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: center;
+	font-size: 22px;
+}
+.box p{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+.box input[type="text"]{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.box input[type="date"]{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.box input[type="radio"]{
+	margin-bottom: 20px;
+}
+.box select{
+	width: 100%;
+	margin-bottom: 20px;
+	background: whitesmoke;
+	height: 30px;
+	color: ##66ffff;
+	font-size: 16px;
+}
+.box input[type="text"]{
+	background: transparent;
+	height: 30px;
+	color: #fff;
+	font-size: 16px;
+}
+.box input[type="date"]{
+	background: transparent;
+	height: 30px;
+	color: #fff;
+	font-size: 16px;
+}
+.box input[type="submit"]{
+	border: none;
+	outline: none;
+	height: 40px;
+	width: 150px;
+	background: #fb2525;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 20px;
+}
+.box input[type="reset"]{
+	border: none;
+	outline: none;
+	height: 40px;
+	width: 150px;
+	background: #fb2525;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 20px;
+}
+.box input[type="submit"]:hover{
+	cursor: pointer;
+	background: #ffc107;
+	color: #000;
+}
+.box input[type="reset"]:hover{
+	cursor: pointer;
+	background: #ffc107;
+	color: #000;
+}
