@@ -47,7 +47,10 @@
                     
                     <?php
                         $username=$_SESSION['username'];
-                        $sql = "SELECT * from bus_history where username='$username'";
+                        $sql = "SELECT bus_history.id, bus_history.username, bus_list.name, bus_list.board,
+                         bus_list.destination, bus_history.seat, bus_history.date, bus_history.payment,
+                        bus_history.status FROM bus_history where username='$username' INNER JOIN bus_list 
+                        ON bus_history.bus_id = bus_list.id;";
                         $result = mysqli_query($conn, $sql);
                         $rowCount = mysqli_num_rows($result);
 
@@ -55,8 +58,8 @@
                             while($row = mysqli_fetch_assoc($result))
                             {
                                 echo "<tbody><tr><td>".$row['id']."</td><td>".$row['username'].
-                                "</td><td>".$row['bus_id']."</td><td>".$row['seat']."</td><td>".
-                                $row['date']."</td><td>".$row['payment']."</td><td>".$row['status'].
+                                "</td><td>".$row['name']."</td><td>".$row['board']."</td><td>".
+                                $row['destination']."</td><td>".$row['seat']."</td><td>".$row['date']."</td><td>".$row['payment']."</td><td>".$row['status'].
                                 "</td></tr></tbody>";
                             }
                             echo "</table>";
@@ -65,30 +68,76 @@
                     </table>
                 </div>
                 <div class="tab2">
-                       
-                       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type
-                    </p>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Train Name</th>
+                            <th>Source</th>
+                            <th>Destination</th>
+                            <th>Seat</th>
+                            <th>Date</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    
+                    <?php
+                        $username=$_SESSION['username'];
+                        $sql = "SELECT * from train_history where username='$username'";
+                        $result = mysqli_query($conn, $sql);
+                        $rowCount = mysqli_num_rows($result);
+
+                        if($rowCount > 0){
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                echo "<tbody><tr><td>".$row['id']."</td><td>".$row['username'].
+                                "</td><td>".$row['train_id']."</td><td>".$row['seat']."</td><td>".
+                                $row['date']."</td><td>".$row['payment']."</td><td>".$row['status'].
+                                "</td></tr></tbody>";
+                            }
+                            echo "</table>";
+                        }
+                    ?>
+                    </table>   
                 </div>
                 <div class="tab3">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type
-                         specimen book. It has survived not only five centuries, but also the leap into 
-                         electronic typesetting, remaining essentially unchanged. It was popularised in 
-                         the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                         and more recently with desktop publishing software like Aldus PageMaker including 
-                         versions of Lorem Ipsum
-                    </p>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Launch Name</th>
+                            <th>Source</th>
+                            <th>Destination</th>
+                            <th>Seat</th>
+                            <th>Date</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    
+                    <?php
+                        $username=$_SESSION['username'];
+                        $sql = "SELECT * from launch_history where username='$username'";
+                        $result = mysqli_query($conn, $sql);
+                        $rowCount = mysqli_num_rows($result);
+
+                        if($rowCount > 0){
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                echo "<tbody><tr><td>".$row['id']."</td><td>".$row['username'].
+                                "</td><td>".$row['launch_id']."</td><td>".$row['seat']."</td><td>".
+                                $row['date']."</td><td>".$row['payment']."</td><td>".$row['status'].
+                                "</td></tr></tbody>";
+                            }
+                            echo "</table>";
+                        }
+                    ?>
+                    </table>
                 </div>
-            </section>
-
-
-
-
-
-            
+            </section>            
         </div>
     </body>
 </html>
