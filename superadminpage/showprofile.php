@@ -1,6 +1,6 @@
 <?php
 
-include "../adminpage/common.inc.php";
+include "../superadminpage/common.inc.php";
 /*
 session_start();
 

@@ -1,18 +1,17 @@
 <?php
-    include "../adminpage/common.inc.php";
-
+    include "../superadminpage/common.inc.php";
     /*session_start();
+    if (!isset($_SESSION['username'])) {
+        header("Location: ../login/login.php");
+    }*/
 
-if (!isset($_SESSION['username'])) {
-	header("Location: ../login/login.php");
-}*/
 
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title></title>
-        <link rel="stylesheet" href="train.css">
+        <link rel="stylesheet" href="launch.css">
         <script>
             function validate(){
                 var input_from=document.getElementById("from");
@@ -35,9 +34,9 @@ if (!isset($_SESSION['username'])) {
                     alert("Please Select how many Ticket you need!");
                     return false;
                 }
-                var input_bus=document.getElementById("train");
+                var input_bus=document.getElementById("launch");
                 if(input_bus.value == ""){
-                    alert("Please Choose a train!");
+                    alert("Please Choose a Bus!");
                     return false;
                 }
             } 
@@ -46,18 +45,22 @@ if (!isset($_SESSION['username'])) {
     <body>
         <div class="box">
             <h1>Ticket booking here</h1>
-            <form action="train.php" method="post" onsubmit="return validate();">
+            <form action="launch.php" method="post" onsubmit="return validate();">
                 <p>Enter City</p>
                 <select name="" id="from">
                     <option disabled>Enter city</option>
                     <option value="Dhaka">Dhaka</option>
-                    <option value="Chittagong">Chittagong</option>
+                    <option value="Barisal">Barisal</option>
+                    <option value="Sundorban">Sundorban</option>
+                    <option value="Kuwakata">Kuwakata</option>
                 </select>
                 <p>TO</p>
                 <select name="" id="to">
                     <option disabled>Enter city</option>
-                    <option value="Chittagong">Chittagong</option>
                     <option value="Dhaka">Dhaka</option>
+                    <option value="Barisal">Barisal</option>
+                    <option value="Sundorban">Sundorban</option>
+                    <option value="Kuwakata">Kuwakata</option>
                 </select>
                 <p>Date of Journey</p>
                 <input type="date" name="date" placeholder="Pick a date" id="date"><br>
@@ -70,16 +73,16 @@ if (!isset($_SESSION['username'])) {
                     <option value="4">+4</option>
 
                 </select><br>
-                <p>Choose Buggy Type</p>
+                <p>Choose Launch Type</p>
                 <input type="radio" id="Ac" name="bus_type" value="Ac">
                 <label for="Ac">AC</label><br>
                 <input type="radio" id="NonAc" name="bus_type" value="NonAc">
                 <label for="Ac">NON AC</label><br>
-                <p>Choose Train</p>
-                <select id="train">
+                <p>Choose Launch</p>
+                <select id="launch">
                 <option value="void" disabled>Choose one</option>
-                    <option value="Sonar_Bangla">Sonar Bangla Express</option>
-                    <option value="Suborno">Suborno Express</option>
+                    <option value="Greenline">Green Line</option>
+                    <option value="Surovi">Surovi</option>
 
                 </select><br>
                 <input type="reset">
