@@ -230,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br>
 
 
-            <p id="choose_type_label" style="display: none">Number of Ticket Need</p>
+            <p id="choose_type_label" style="display: none">Choose Type: </p>
             <select id="choose_type" name="choose_type" style="display: none">
                 <option selected="" disabled="">Choose Bus Type</option>
                 <option id="ac" value="ac">AC</option>
