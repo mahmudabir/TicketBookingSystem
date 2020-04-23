@@ -155,13 +155,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         function destination_change() {
             document.getElementById('number').style.display = 'block';
-            document.getElementById('number_label').style.display = 'block';
-
-            document.getElementById('choose_type').style.display = 'block';
-            document.getElementById('choose_type_label').style.display = 'block';
+            document.getElementById('number_label').style.display = 'block'; 
 
             document.getElementById('destination').style.display = 'none';
             document.getElementById('destination_label').style.display = 'none';
+        }
+
+        function number_change(){
+            document.getElementById('choose_type').style.display = 'block';
+            document.getElementById('choose_type_label').style.display = 'block';
+
+            document.getElementById('number').style.display = 'none';
+            document.getElementById('number_label').style.display = 'none';
         }
 
         function reset_page() {
@@ -216,7 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
 
             <p id="number_label" style="display: none">Number of Ticket Need</p>
-            <select id="number" name="number" style="display: none">
+            <select id="number" name="number" style="display: none" onchange="number_change()">
                 <option disabled="" selected="">Select</option>
                 <option value="1">+1</option>
                 <option value="2">+2</option>
