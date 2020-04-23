@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($_POST['destination'])) {
-        $destinationErr = "Please Select a destination location.";
+        $destinationErr = "Please Select board or destination location.";
     } else {
         if ($board == $_POST['destination']) {
             $destinationErr = "Board & destination Location cannot be same.";
@@ -105,10 +105,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -170,7 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             window.location.reload();
         }
 
-        function fetch_cost(str, number) {
+        function show_per_seat_cost(str, number) {
             var xhttp;
             if (str == "") {
                 document.getElementById("txtHint").innerHTML = "";
@@ -185,12 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             xhttp.open("GET", "buscostget.php?q=" + str + "&r=" + number, true);
             xhttp.send();
         }
-
-        function show_per_seat_cost(str, number) {
-            fetch_cost(str, number);
-        }
     </script>
-
 </head>
 
 <body>
@@ -215,7 +208,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <select name="destination" id="destination" style="display: none" onchange="destination_change('', '')">
                 <option selected="" disabled="">Select City</option>
                 <?php
-
                 $bus_list = load_bus_destination();
                 foreach ($bus_list as $bus_list) {
                     echo "<option id='" . $bus_list['destination'] . "' value='" . $bus_list['destination'] . "'>" . $bus_list['destination'] . "</option>";
@@ -230,7 +222,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="2">+2</option>
                 <option value="3">+3</option>
                 <option value="4">+4</option>
-
             </select><br>
 
 
@@ -239,10 +230,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option selected="" disabled="">Choose Bus Type</option>
                 <option id="ac" value="ac">AC</option>
                 <option id="nonac" value="nonac">Non Ac</option>
-
             </select><br>
 
-            <p>Choose Bus</p>
+            <p id="bus_list_label">Choose Bus</p>
             <select name="bus_list" id="bus_list" onclick="show_per_seat_cost(this.value, number.value)">
                 <option selected="" disabled="">Select Bus</option>
             </select>
@@ -256,9 +246,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p style="color: yellow"><?php echo $numberErr; ?></p><br>
             <p style="color: yellow"><?php echo $destinationErr; ?></p>
             <p style="color: yellow"><?php echo $choose_typeErr; ?></p>
-            
-
-
         </form>
     </div>
 </body>

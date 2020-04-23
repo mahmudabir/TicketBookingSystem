@@ -1,13 +1,13 @@
 <?php
 
-//include "../mainpage/bus.php";
+//include "../mainpage/train.php";
 $mysqli = new mysqli("localhost", "root", "", "ticketdb");
 if ($mysqli->connect_error) {
-  exit('Could not connect');
+    exit('Could not connect');
 }
 
-$sql = "SELECT cost FROM bus_list WHERE id = ?";
-$cost = 0;
+$sql = "SELECT cost FROM train_list WHERE id = ?";
+
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("s", $_GET['q']);
 //$stmt->bind_param("n", $_GET['r']);
@@ -37,7 +37,7 @@ try {
     echo "<th>Total Cost: </th>";
     echo "<td>" . $tcost . "</td>";
     echo "</tr>";
-    echo "</table>";  
+    echo "</table>";
 } catch (Exception $e) {
     echo "Message: " . $e->getMessage();
 }
