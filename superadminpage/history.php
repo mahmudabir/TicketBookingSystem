@@ -1,10 +1,18 @@
 <?php
-include "../superadminpage/common.inc.php";
-include "../db/db_connect.inc.php";
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login/login.php");
-}
+    include "../superadminpage/common.inc.php";
+    include "../db/db_connect.inc.php";
+    session_start();
+    if (!isset($_SESSION['username'])) {
+        header("Location: ../login/login.php");
+    }
+    $rpp=05;
+    isset($_GET['page'])?$page =$_GET['page']:$page=0;
+    if($page>1){
+        $start =($page * $rpp)-$rpp;
+    }else{
+        $start=0;
+    }
+    
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +20,11 @@ if (!isset($_SESSION['username'])) {
 
 <head>
     <title>History</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="history.css">
+    <link rel="stylesheet" href="bootstrap.css">
 
 </head>
 
@@ -48,8 +60,11 @@ if (!isset($_SESSION['username'])) {
                     </thead>
 
                     <?php
-                    $username = $_SESSION['username'];
-                    $sql = "SELECT bus_history.id, bus_history.username, bus_list.name, bus_list.board, bus_list.destination, bus_history.seat, bus_history.date, bus_history.payment,bus_history.status FROM bus_history INNER JOIN bus_list ON bus_history.bus_id = bus_list.id";
+                    $sqli="SELECT *FROM bus_history";
+                    $resultSet=mysqli_query($conn,$sqli);
+                    $numRows=mysqli_num_rows($resultSet);
+                    $totalpages=ceil($numRows/$rpp);
+                    $sql = "SELECT bus_history.id, bus_history.username, bus_list.name, bus_list.board, bus_list.destination, bus_history.seat, bus_history.date, bus_history.payment,bus_history.status FROM bus_history INNER JOIN bus_list ON bus_history.bus_id = bus_list.id LIMIT $start,$rpp";
                     $result = mysqli_query($conn, $sql);
                     $rowCount = mysqli_num_rows($result);
                     if ($rowCount > 0) {
@@ -72,12 +87,14 @@ if (!isset($_SESSION['username'])) {
                     } else {
                         echo $message = "No History!";
                     }
-
-
-
+                    for($x=1;$x <= $totalpages;$x++){
+                        echo "<a href='?page=$x'>   $x</a>";
+                    }
                     ?>
                 </table>
+
             </div>
+            
             <div class="tab2">
                 <table class="content-table">
                     <thead>
@@ -126,6 +143,7 @@ if (!isset($_SESSION['username'])) {
 
                     ?>
                 </table>
+                
             </div>
             <div class="tab3">
                 <table class="content-table">
