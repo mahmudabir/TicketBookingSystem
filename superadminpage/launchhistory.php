@@ -15,17 +15,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="history.css">
 </head>
+
 <body>
     <div class="table">
-        <h1>Bus History Table</h1>
+        <h1>Launch History Table</h1>
         <section>
-        <div class=tab1>
+        <div class="tab3">
                 <table class="content-table">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Username</th>
-                            <th>BUS Name</th>
+                            <th>Launch Name</th>
                             <th>Source</th>
                             <th>Destination</th>
                             <th>Seat</th>
@@ -37,21 +38,22 @@
 
                     <?php
                     /*pagination*/
-                    $rpp=05;
-                    isset($_GET['page'])?$page =$_GET['page']:$page=0;
-                    if($page>1){
-                        $start =($page * $rpp)-$rpp;
+                    $rpp2=05;
+                    isset($_GET['page'])?$page1 =$_GET['page']:$page1=0;
+                    if($page1>1){
+                        $start2 =($page1 * $rpp2)-$rpp2;
                     }else{
-                        $start=0;
+                        $start2=0;
                     }
-                    $sqli="SELECT *FROM bus_history";
-                    $resultSet=mysqli_query($conn,$sqli);
-                    $numRows=mysqli_num_rows($resultSet);
-                    $totalpages=ceil($numRows/$rpp);
+                    $sqli2="SELECT *FROM launch_history";
+                    $resultSet2=mysqli_query($conn,$sqli2);
+                    $numRows2=mysqli_num_rows($resultSet2);
+                    $totalpages2=ceil($numRows2/$rpp2);
                     /*pagination*/
-                    $sql = "SELECT bus_history.id, bus_history.username, bus_list.name, bus_list.board, bus_list.destination, bus_history.seat, bus_history.date, bus_history.payment,bus_history.status FROM bus_history INNER JOIN bus_list ON bus_history.bus_id = bus_list.id LIMIT $start,$rpp";
+                    $sql = "SELECT launch_history.id, launch_history.username, launch_list.name, launch_list.board, launch_list.destination, launch_history.seat, launch_history.date, launch_history.payment,launch_history.status FROM launch_history INNER JOIN launch_list ON launch_history.launch_id = launch_list.id LIMIT $start2,$rpp2";
                     $result = mysqli_query($conn, $sql);
                     $rowCount = mysqli_num_rows($result);
+
                     if ($rowCount > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tbody>
@@ -59,7 +61,7 @@
                             <td>" . $row['id'] . "</td>
                             <td>" . $row['username'] . "</td>
                             <td>" . $row['name'] . "</td>
-                            <td>" . $row['board'] . "</td> 
+                            <td>" . $row['board'] . "</td>
                             <td>" . $row['destination'] . "</td>
                             <td>" . $row['seat'] . "</td>
                             <td>" . $row['date'] . "</td>
@@ -73,16 +75,16 @@
                         echo $message = "No History!";
                     }
                     /*pagination*/
-                    if($page>1)
+                    if($page1>1)
                     {
-                        echo "<a href='?page=".($page-1)."' class='btn'>Previous<</a>";
+                        echo "<a href='?page=".($page1-1)."' class='btn'>Previous<</a>";
                     }
-                    for($x=1;$x <= $totalpages;$x++){
+                    for($x=1;$x <= $totalpages2;$x++){
                         echo "<a href='?page=$x' class='btn'>   $x</a>";
                     }
                     if($x>1)
                     {
-                        echo "<a href='?page=".($page+1)."' class='btn'>Next></a>";
+                        echo "<a href='?page=".($page1+1)."' class='btn'>Next</a>";
                     }
                     /*pagination*/
                     ?>
