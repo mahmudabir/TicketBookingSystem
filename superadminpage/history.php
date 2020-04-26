@@ -19,7 +19,7 @@
 <body>
     <div class="table">
         <h1>History Table</h1>
-        <input checked id="tab1" type="radio" name="history">
+        <input checked="checked" id="tab1" type="radio" name="history">
         <input id="tab2" type="radio" name="history">
         <input id="tab3" type="radio" name="history">
         <nav>
@@ -98,7 +98,6 @@
                     }
                     /*pagination*/
                     ?>
-                    
                 </table>
             </div>
             <!--END BUS History-->
