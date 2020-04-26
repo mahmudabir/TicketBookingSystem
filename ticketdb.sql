@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2020 at 01:26 PM
+-- Generation Time: Apr 26, 2020 at 12:45 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -142,8 +142,11 @@ INSERT INTO `bus_history` (`id`, `username`, `bus_id`, `seat`, `date`, `payment`
 (99, 'abir', 1, 2, '2020-04-22 19:02:34', 600, 'paid'),
 (100, 'abir', 1, 2, '2020-04-22 19:03:22', 600, 'paid'),
 (101, 'abir', 5, 2, '2020-04-22 19:04:56', 700, 'paid'),
-(102, 'abir', 5, 2, '2020-04-22 19:05:15', 700, 'paid'),
-(103, 'abir', 5, 2, '2020-04-22 19:27:29', 700, 'paid');
+(104, 'abir', 2, 3, '2020-04-23 17:09:40', 900, 'paid'),
+(105, 'abir', 7, 3, '2020-04-25 20:36:43', 660, 'paid'),
+(106, 'abir', 7, 3, '2020-04-25 20:36:45', 660, 'paid'),
+(107, 'abir', 7, 3, '2020-04-25 20:36:48', 660, 'paid'),
+(108, 'abir', 1, 3, '2020-04-25 20:45:42', 900, 'paid');
 
 -- --------------------------------------------------------
 
@@ -167,13 +170,13 @@ CREATE TABLE `bus_list` (
 --
 
 INSERT INTO `bus_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, `available_seat`, `total_seat`) VALUES
-(1, 'Shonar Bangla', 'Dhaka', 'Sherpur', 'nonac', 300, 19, 40),
+(1, 'Shonar Bangla', 'Dhaka', 'Sherpur', 'nonac', 300, 40, 40),
 (2, 'Shonar Bangla', 'Sherpur', 'Dhaka', 'nonac', 300, 40, 40),
-(3, 'Hazi', 'Dhaka', 'Sherpur', 'nonac', 300, 28, 40),
+(3, 'Hazi', 'Dhaka', 'Sherpur', 'nonac', 300, 40, 40),
 (4, 'Hazi', 'Sherpur', 'Dhaka', 'nonac', 300, 40, 40),
-(5, 'Hanif', 'Dhaka', 'Mymensingh', 'ac', 350, 24, 40),
+(5, 'Hanif', 'Dhaka', 'Mymensingh', 'ac', 350, 40, 40),
 (6, 'Hanif', 'Mymensingh', 'Dhaka', 'ac', 350, 40, 40),
-(7, 'Ena', 'Dhaka', 'Mymensingh', 'nonac', 220, 9, 40),
+(7, 'Ena', 'Dhaka', 'Mymensingh', 'nonac', 220, 40, 40),
 (8, 'Ena', 'Mymensingh', 'Dhaka', 'nonac', 220, 40, 40);
 
 -- --------------------------------------------------------
@@ -232,10 +235,11 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `nid`, `balance`, `type`) VALUES
-(26, 'abir', '$2y$10$X0wNChsxszQ/8xqe6axlH.jqrhzPwd1wdBptAtID1BHoF.e.FpUVG', 'Abir', 'Mahmud', 'amabirmahmud@gmail.com', '1234567890357890897654323456789', 2147461327, 'user'),
+(26, 'abir', '$2y$10$X0wNChsxszQ/8xqe6axlH.jqrhzPwd1wdBptAtID1BHoF.e.FpUVG', 'Abir', 'Mahmud', 'amabirmahmud@gmail.com', '1234567890357890897654323456789', 2147455497, 'user'),
 (27, 'hasib', '$2y$10$XXzhoIJFhkgZa3iyOtO8jeVXiGqvx.rYVPcB704NOQutdR7hUnINa', 'Hasib', 'Shanto', 'hasibshanto0@gmail.com', '987654321', 2147483647, 'user'),
 (28, 'ayon', '$2y$10$6GBqrMcHWKM701fzl/U7ZugbR9axUDYkXwcler8bPsKGCYn8N93wu', 'Nabil Arman', 'Ayon', 'nabilarmanayon@gmail.com', '3214567', 2147483647, 'user'),
-(1003, 'mahmud', '$2y$10$QWQutDEI1HegmOwd/9ppJuMlNSUsytHrvC3WnXjujSEQL0zBsLCk2', 'Abir', 'Mahmud', 'asdas@asdasd', '2147483647', 2147482747, 'admin');
+(1003, 'mahmud', '$2y$10$QWQutDEI1HegmOwd/9ppJuMlNSUsytHrvC3WnXjujSEQL0zBsLCk2', 'Abir', 'Mahmud', 'asdas@asdasd', '2147483647', 2147482747, 'superadmin'),
+(1004, 'admin', '$2y$10$0UbaPxqagOVW6J/scUh4jesvUn/Nxih5Mkb13DVq1zDuvNOpvxIXW', 'Abir', 'Mahmud', 'asdfghjk@sfdghj', '123456789123', 0, 'admin');
 
 -- --------------------------------------------------------
 
@@ -258,7 +262,9 @@ CREATE TABLE `train_history` (
 --
 
 INSERT INTO `train_history` (`id`, `username`, `train_id`, `seat`, `date`, `payment`, `status`) VALUES
-(1, 'abir', 4, 3, '2020-04-23 04:31:51', 900, 'paid');
+(1, 'abir', 4, 3, '2020-04-23 04:31:51', 900, 'paid'),
+(2, 'abir', 6, 4, '2020-04-23 17:21:06', 1600, 'paid'),
+(3, 'abir', 2, 3, '2020-04-25 20:21:22', 450, 'paid');
 
 -- --------------------------------------------------------
 
@@ -285,7 +291,7 @@ INSERT INTO `train_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, 
 (1, 'Agnibina', 'Dhaka', 'Tarakandi', 'nonac', 150, 240, 240),
 (2, 'Agnibina', 'Tarakandi', 'Dhaka', 'nonac', 150, 240, 240),
 (3, 'Trina', 'Dhaka', 'Chittagong', 'nonac', 300, 240, 240),
-(4, 'Trina', 'Chittagong', 'Dhaka', 'nonac', 300, 237, 240),
+(4, 'Trina', 'Chittagong', 'Dhaka', 'nonac', 300, 240, 240),
 (5, 'Shuborno Express', 'Dhaka', 'Chittagong', 'ac', 400, 240, 240),
 (6, 'Shuborno Express', 'Chittagong', 'Dhaka', 'ac', 400, 240, 240);
 
@@ -344,7 +350,7 @@ ALTER TABLE `train_list`
 -- AUTO_INCREMENT for table `bus_history`
 --
 ALTER TABLE `bus_history`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `bus_list`
@@ -368,13 +374,13 @@ ALTER TABLE `launch_list`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1004;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
 
 --
 -- AUTO_INCREMENT for table `train_history`
 --
 ALTER TABLE `train_history`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `train_list`
