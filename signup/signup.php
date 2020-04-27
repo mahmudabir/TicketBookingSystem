@@ -41,10 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$passErr = "Password length must be atleast 8!";
 	}
 	}
-
-
-	
-
 	$sqlUserCheck = "SELECT username FROM login WHERE username = '$username'";
 	$result = mysqli_query($conn, $sqlUserCheck);
 

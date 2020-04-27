@@ -4,10 +4,11 @@ body {
 	background: url(bus.jpeg);
 	background-size:cover;
 	font-family: sans-serif;
+	overflow: hidden;
 }
 .box{
-	width: 380px;
-	height: 620px;
+	width: 1170px;
+	height: 720px;
 	background: #000;
 	color: #fff;
 	top:50%;
@@ -15,11 +16,11 @@ body {
 	position: absolute;
 	transform: translate(-50% ,-50%);
 	box-sizing: border-box;
-	padding: 70px 30px;
+	padding: 40px 30px;
 }
 h1{
 	margin: 0;
-	padding: 0 0 20px;
+	padding: 0 0 10px;
 	text-align: center;
 	font-size: 22px;
 }
@@ -29,23 +30,12 @@ h1{
 	font-weight: bold;
 }
 .box input[type="text"]{
-	width: 100%;
+	width: 32%;
 	margin-bottom: 20px;
 }
-.box input[type="date"]{
-	width: 100%;
+.box input[type="number"]{
+	width: 32%;
 	margin-bottom: 20px;
-}
-.box input[type="radio"]{
-	margin-bottom: 20px;
-}
-.box select{
-	width: 100%;
-	margin-bottom: 20px;
-	background: whitesmoke;
-	height: 30px;
-	color: ##66ffff;
-	font-size: 16px;
 }
 .box input[type="text"]{
 	background: transparent;
@@ -53,7 +43,14 @@ h1{
 	color: #fff;
 	font-size: 16px;
 }
-.box input[type="date"]{
+.box select {
+	width: 32%;
+	height: 30px;
+    background: whitesmoke;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+.box input[type="number"]{
 	background: transparent;
 	height: 30px;
 	color: #fff;
@@ -88,4 +85,49 @@ h1{
 	cursor: pointer;
 	background: #ffc107;
 	color: #000;
+}
+.table{
+	top:55%;
+	left: 67%;
+	position: absolute;
+	transform: translate(-50% ,-50%);
+	box-sizing: border-box;
+	padding: 40px 30px;
+	overflow: scroll;
+}
+.table{
+    padding: 20px;
+   
+    border: 1px solid #ddd;
+    background-color: #000;  
+}
+.content-table{
+    border-collapse: collapse;
+    margin: 20px 0;
+    margin-left: 15px;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+
+}
+.content-table thead tr{
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+}
+.content-table th,
+.content-table td{
+    padding: 12px 15px;
+}
+.content-table tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+.content-table tbody tr:nth-last-of-type(even){
+    background-color: #f3f3f3;
+}
+.content-table tbody tr:last-of-type{
+    border-bottom: 2px solid #009879;
 }
