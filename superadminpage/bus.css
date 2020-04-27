@@ -100,7 +100,9 @@ h1 {
 }
 
 .table {
-    top: 50%;
+    width: 740px;
+    height: 590px;
+    top: 54%;
     left: 67%;
     position: absolute;
     transform: translate(-50%, -50%);

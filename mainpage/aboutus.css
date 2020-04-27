@@ -3,6 +3,7 @@
     background: url(bg.jpg) no-repeat center;
     background-size: cover;
     padding: 40px 0;
+    overflow: hidden;
 }
 .contact_section h1{
     text-align: center;

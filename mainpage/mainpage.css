@@ -4,4 +4,5 @@ body {
     background-color: rgba(27, 31, 34, 0.85);
     background: url(main.jpg);
     background-size: cover;
+    overflow: hidden;
 }

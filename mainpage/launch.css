@@ -4,6 +4,7 @@ body {
     background: url(launch.jpeg);
     background-size: cover;
     font-family: sans-serif;
+    overflow: hidden;
 }
 
 .box {
