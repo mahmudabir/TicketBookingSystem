@@ -39,9 +39,14 @@
             $seat = mysqli_real_escape_string($conn, $_POST['seat']);
         }
         if(!empty($busname) && !empty($source) && !empty($destination) && !empty($type) && !empty($cost) && !empty($seat)){
-            $sql = "INSERT INTO bus_list (busname,source,destination,type,cost,seat) 
-		    VALUES ('$busname','$source','$destination','$type','$cost','$seat');";
-			mysqli_query($conn, $sql);
+            $sql = "INSERT INTO bus_list (name, board, destination, type, cost, available_seat, total_seat) 
+		    VALUES ('$busname', '$source', '$destination', '$type', '$cost', '$seat', '$seat');";
+            mysqli_query($conn, $sql);
+            
+            $sql2 = "INSERT INTO bus_list (name, board, destination, type, cost, available_seat, total_seat) 
+		    VALUES ('$busname', '$destination', '$source', '$type', '$cost', '$seat', '$seat');";
+            mysqli_query($conn, $sql2);
+
 			$success = "Successfully Submitted.";
         }
     }
