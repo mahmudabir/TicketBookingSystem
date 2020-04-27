@@ -1,107 +1,121 @@
 body {
-	margin:0;
-	padding:0;
-	background: url(bus.jpeg);
-	background-size:cover;
-	font-family: sans-serif;
-	overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: url(bus.jpeg);
+    background-size: cover;
+    font-family: sans-serif;
+    overflow: hidden;
 }
-.box{
-	width: 1170px;
-	height: 720px;
-	background: #000;
-	color: #fff;
-	top:50%;
-	left: 50%;
-	position: absolute;
-	transform: translate(-50% ,-50%);
-	box-sizing: border-box;
-	padding: 40px 30px;
+
+.box {
+    width: 1170px;
+    height: 720px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 40px 30px;
 }
-h1{
-	margin: 0;
-	padding: 0 0 10px;
-	text-align: center;
-	font-size: 22px;
+
+h1 {
+    margin: 0;
+    padding: 0 0 10px;
+    text-align: center;
+    font-size: 22px;
 }
-.box p{
-	margin: 0;
-	padding: 0;
-	font-weight: bold;
+
+.box p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
 }
-.box input[type="text"]{
-	width: 32%;
-	margin-bottom: 20px;
+
+.box input[type="text"] {
+    width: 32%;
+    margin-bottom: 20px;
 }
-.box input[type="number"]{
-	width: 32%;
-	margin-bottom: 20px;
+
+.box input[type="number"] {
+    width: 32%;
+    margin-bottom: 20px;
 }
-.box input[type="text"]{
-	background: transparent;
-	height: 30px;
-	color: #fff;
-	font-size: 16px;
+
+.box input[type="text"] {
+    background: transparent;
+    height: 30px;
+    color: #fff;
+    font-size: 16px;
 }
+
 .box select {
-	width: 32%;
-	height: 30px;
+    width: 32%;
+    height: 30px;
     background: whitesmoke;
-	font-size: 16px;
-	margin-bottom: 20px;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
-.box input[type="number"]{
-	background: transparent;
-	height: 30px;
-	color: #fff;
-	font-size: 16px;
+
+.box input[type="number"] {
+    background: transparent;
+    height: 30px;
+    color: #fff;
+    font-size: 16px;
 }
-.box input[type="submit"]{
-	border: none;
-	outline: none;
-	height: 40px;
-	width: 150px;
-	background: #fb2525;
-	color: #fff;
-	font-size: 18px;
-	border-radius: 20px;
+
+.box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
 }
-.box input[type="reset"]{
-	border: none;
-	outline: none;
-	height: 40px;
-	width: 150px;
-	background: #fb2525;
-	color: #fff;
-	font-size: 18px;
-	border-radius: 20px;
+
+.box input[type="button"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
 }
-.box input[type="submit"]:hover{
-	cursor: pointer;
-	background: #ffc107;
-	color: #000;
+
+.box input[type="submit"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
 }
-.box input[type="reset"]:hover{
-	cursor: pointer;
-	background: #ffc107;
-	color: #000;
+
+.box input[type="button"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
 }
-.table{
-	top:50%;
-	left: 67%;
-	position: absolute;
-	transform: translate(-50% ,-50%);
-	box-sizing: border-box;
-	padding: 40px 30px;
-	overflow: scroll;
+
+.table {
+    top: 50%;
+    left: 67%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 40px 30px;
+    overflow: scroll;
 }
-.table{
+
+.table {
     padding: 20px;
-   
     border: 1px solid #ddd;
-    background-color: #000;  
+    background-color: #000;
 }
-.content-table{
+
+.content-table {
     border-collapse: collapse;
     margin: 20px 0;
     margin-left: 15px;
@@ -109,25 +123,29 @@ h1{
     min-width: 400px;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.15);
-
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-.content-table thead tr{
+
+.content-table thead tr {
     background-color: #009879;
     color: #ffffff;
     text-align: center;
     font-weight: bold;
 }
+
 .content-table th,
-.content-table td{
+.content-table td {
     padding: 12px 15px;
 }
-.content-table tbody tr{
+
+.content-table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
-.content-table tbody tr:nth-last-of-type(even){
+
+.content-table tbody tr:nth-last-of-type(even) {
     background-color: #f3f3f3;
 }
-.content-table tbody tr:last-of-type{
+
+.content-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
