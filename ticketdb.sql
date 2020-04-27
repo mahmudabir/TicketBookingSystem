@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2020 at 12:45 PM
+-- Generation Time: Apr 27, 2020 at 04:50 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -177,7 +177,15 @@ INSERT INTO `bus_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, `a
 (5, 'Hanif', 'Dhaka', 'Mymensingh', 'ac', 350, 40, 40),
 (6, 'Hanif', 'Mymensingh', 'Dhaka', 'ac', 350, 40, 40),
 (7, 'Ena', 'Dhaka', 'Mymensingh', 'nonac', 220, 40, 40),
-(8, 'Ena', 'Mymensingh', 'Dhaka', 'nonac', 220, 40, 40);
+(8, 'Ena', 'Mymensingh', 'Dhaka', 'nonac', 220, 40, 40),
+(9, 'AC Super', 'Dhaka', 'Sherpur', 'ac', 400, 40, 40),
+(10, 'AC Super', 'Sherpur', 'Dhaka', 'ac', 400, 40, 40),
+(11, 'AC Delux', 'Dhaka', 'Sherpur', 'ac', 400, 40, 40),
+(12, 'AC Delux', 'Sherpur', 'Dhaka', 'ac', 400, 40, 40),
+(13, 'Sadika', 'Dhaka', 'Sherpur', 'nonac', 300, 40, 40),
+(14, 'Sadika', 'Sherpur', 'Dhaka', 'nonac', 300, 40, 40),
+(15, 'Chamber of Commerce', 'Dhaka', 'Sherpur', 'nonac', 300, 40, 40),
+(16, 'Chamber of Commerce', 'Sherpur', 'Dhaka', 'nonac', 300, 40, 40);
 
 -- --------------------------------------------------------
 
@@ -356,7 +364,7 @@ ALTER TABLE `bus_history`
 -- AUTO_INCREMENT for table `bus_list`
 --
 ALTER TABLE `bus_list`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `launch_history`
