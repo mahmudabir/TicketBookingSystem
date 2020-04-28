@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2020 at 04:50 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- Generation Time: Apr 28, 2020 at 09:30 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,7 +33,7 @@ CREATE TABLE `bus_history` (
   `username` varchar(100) NOT NULL,
   `bus_id` int(100) NOT NULL,
   `seat` int(100) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `payment` int(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -161,8 +161,8 @@ CREATE TABLE `bus_list` (
   `destination` varchar(100) NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'nonac',
   `cost` int(100) NOT NULL,
-  `available_seat` int(100) NOT NULL DEFAULT 40,
-  `total_seat` int(100) NOT NULL DEFAULT 40
+  `available_seat` int(100) NOT NULL DEFAULT '40',
+  `total_seat` int(100) NOT NULL DEFAULT '40'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -198,7 +198,7 @@ CREATE TABLE `launch_history` (
   `username` varchar(100) NOT NULL,
   `launch_id` int(100) NOT NULL,
   `seat` int(100) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `payment` int(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -216,9 +216,27 @@ CREATE TABLE `launch_list` (
   `destination` varchar(100) NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'nonac',
   `cost` int(100) NOT NULL,
-  `available_seat` int(100) NOT NULL DEFAULT 240,
-  `total_seat` int(100) NOT NULL DEFAULT 240
+  `available_seat` int(100) NOT NULL DEFAULT '240',
+  `total_seat` int(100) NOT NULL DEFAULT '240'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `launch_list`
+--
+
+INSERT INTO `launch_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, `available_seat`, `total_seat`) VALUES
+(3, 'Sundorban-1', 'Dhaka', 'Sundorban', 'nonac', 350, 300, 300),
+(4, 'Sundorban-1', 'Sundorban', 'Dhaka', 'nonac', 350, 300, 300),
+(5, 'Sundorban-2', 'Dhaka', 'Sundorban', 'nonac', 350, 300, 300),
+(6, 'Sundorban-2', 'Sundorban', 'Dhaka', 'nonac', 350, 300, 300),
+(7, 'Green Line', 'Cox\'s Bazar', 'Saint Martin', 'ac', 450, 300, 300),
+(8, 'Green Line', 'Saint Martin', 'Cox\'s Bazar', 'ac', 450, 300, 300),
+(9, 'Rupsha', 'Dhaka', 'Khulna', 'nonac', 350, 300, 300),
+(10, 'Rupsha', 'Khulna', 'Dhaka', 'nonac', 350, 300, 300),
+(11, 'Bay Cruiser', 'Cox\'s Bazar', 'Saint Martin', 'ac', 450, 300, 300),
+(12, 'Bay Cruiser', 'Saint Martin', 'Cox\'s Bazar', 'ac', 450, 300, 300),
+(13, 'Surovi', 'Dhaka', 'Barishal', 'nonac', 350, 300, 300),
+(14, 'Surovi', 'Barishal', 'Dhaka', 'nonac', 350, 300, 300);
 
 -- --------------------------------------------------------
 
@@ -234,7 +252,7 @@ CREATE TABLE `login` (
   `lastname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `nid` varchar(100) NOT NULL,
-  `balance` int(100) NOT NULL DEFAULT 0,
+  `balance` int(100) NOT NULL DEFAULT '0',
   `type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -260,7 +278,7 @@ CREATE TABLE `train_history` (
   `username` varchar(100) NOT NULL,
   `train_id` int(100) NOT NULL,
   `seat` int(100) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `payment` int(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -287,8 +305,8 @@ CREATE TABLE `train_list` (
   `destination` varchar(100) NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'nonac',
   `cost` int(100) NOT NULL,
-  `available_seat` int(100) NOT NULL DEFAULT 240,
-  `total_seat` int(100) NOT NULL DEFAULT 240
+  `available_seat` int(100) NOT NULL DEFAULT '240',
+  `total_seat` int(100) NOT NULL DEFAULT '240'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -301,7 +319,13 @@ INSERT INTO `train_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, 
 (3, 'Trina', 'Dhaka', 'Chittagong', 'nonac', 300, 240, 240),
 (4, 'Trina', 'Chittagong', 'Dhaka', 'nonac', 300, 240, 240),
 (5, 'Shuborno Express', 'Dhaka', 'Chittagong', 'ac', 400, 240, 240),
-(6, 'Shuborno Express', 'Chittagong', 'Dhaka', 'ac', 400, 240, 240);
+(6, 'Shuborno Express', 'Chittagong', 'Dhaka', 'ac', 400, 240, 240),
+(7, 'Sonar Bangla', 'Dhaka', 'Chittagong', 'ac', 450, 240, 240),
+(8, 'Sonar Bangla', 'Chittagong', 'Dhaka', 'ac', 450, 240, 240),
+(9, 'Meghna', 'Chandpur', 'Chittagong', 'nonac', 350, 240, 240),
+(10, 'Meghna', 'Chittagong', 'Chandpur', 'nonac', 350, 240, 240),
+(11, 'Sundorban Express', 'Dhaka', 'Khulna', 'ac', 350, 240, 240),
+(12, 'Sundorban Express', 'Khulna', 'Dhaka', 'ac', 350, 240, 240);
 
 --
 -- Indexes for dumped tables
@@ -364,7 +388,7 @@ ALTER TABLE `bus_history`
 -- AUTO_INCREMENT for table `bus_list`
 --
 ALTER TABLE `bus_list`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `launch_history`
@@ -376,7 +400,7 @@ ALTER TABLE `launch_history`
 -- AUTO_INCREMENT for table `launch_list`
 --
 ALTER TABLE `launch_list`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -394,7 +418,7 @@ ALTER TABLE `train_history`
 -- AUTO_INCREMENT for table `train_list`
 --
 ALTER TABLE `train_list`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
