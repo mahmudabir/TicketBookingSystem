@@ -9,7 +9,7 @@ body {
 
 .box {
     width: 1170px;
-    height: 720px;
+    height: 790px;
     background: #000;
     color: #fff;
     top: 50%;
@@ -101,8 +101,8 @@ h1 {
 
 .table {
     width: 740px;
-    height: 590px;
-    top: 54%;
+    height: 620px;
+    top: 51%;
     left: 67%;
     position: absolute;
     transform: translate(-50%, -50%);
