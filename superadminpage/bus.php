@@ -89,6 +89,8 @@ if (isset($_POST['Add'])) {
         }
     }
 
+}elseif(isset($_POST['Reset'])){
+    header("Location: ../superadminpage/bus.php");
 }
 
 ?>
@@ -99,9 +101,7 @@ if (isset($_POST['Add'])) {
     <title></title>
     <link rel="stylesheet" href="transport.css">
     <script>
-        function reset_page() {
-            window.location.reload();
-        }
+    
     </script>
 </head>
 
@@ -126,7 +126,7 @@ if (isset($_POST['Add'])) {
             <p>Total Seat</p>
             <input type="number" name="seat" placeholder="Enter Seat Number" value="<?php echo $seat; ?>"><br><span style="color:red;"> <?php echo $seatErr; ?> </span><br>
 
-            <input type="button" value="Reset Fields" onclick="reset_page()">
+            <input type="submit" name="Reset" value="Reset Fields">
             <input type="submit" name="Add" value="Add Bus" style="margin-left:30px"><br><br>
 
             <p>Input the bus ID you want to Reset or Delete</p>

@@ -12,99 +12,106 @@ $boardErr = $destinationErr = $numberErr = $choose_typeErr = $train_listErr = ""
 
 $payment = $per_seat_cost = $number = $number = $seat = $chosen_number = $available_seat = $balance = $new_balance = 0;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST['board'])) {
-        $boardErr = "Please Select a board location.";
-    } else {
-        $board = $_POST['board'];
-    }
 
-    if (empty($_POST['destination'])) {
-        $destinationErr = "Please Select board or destination location.";
-    } else {
-        if ($board == $_POST['destination']) {
-            $destinationErr = "Board & destination Location cannot be same.";
+if (isset($_POST['reset'])) {
+    header("Location: ../mainpage/train.php");
+    
+}elseif (isset($_POST['confirm'])){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST['board'])) {
+            $boardErr = "Please Select a board location.";
         } else {
-            $destination = $_POST['destination'];
+            $board = $_POST['board'];
         }
-    }
-
-    if (empty($_POST['choose_type'])) {
-        $choose_typeErr = "Please Select the type of train.";
-    } else {
-        $choose_type = $_POST['choose_type'];
-    }
-
-    if (empty($_POST['train_list'])) {
-        $train_listErr = "Please Select a destination location.";
-    } else {
-        $train_list = $_POST['train_list'];
-    }
-
-    if (empty($_POST['number'])) {
-        $numberErr = "Please Select a number of seat.";
-    } else {
-    }
-
-    if (!empty($_POST['board']) && !empty($_POST['destination']) && !empty($_POST['number']) && !empty($_POST['choose_type']) && !empty($_POST['train_list'])) {
-        $chosen_number = $_POST['number'];
-        $sql_seat_check = "SELECT available_seat FROM train_list WHERE id='$train_list' and board = '$board' and destination = '$destination'";
-        $seat = mysqli_query($conn, $sql_seat_check);
-
-        while ($row = mysqli_fetch_assoc($seat)) {
-            $available_seat = $row['available_seat'];
-        }
-
-        if ($available_seat >= $chosen_number) {
-            $number = $chosen_number;
-
-            $username = $_SESSION['username'];
-            $sql_train_check = "SELECT id, cost from train_list WHERE id='$train_list' and board = '$board' and destination = '$destination'";
-            $result = mysqli_query($conn, $sql_train_check);
-
-            while ($row = mysqli_fetch_assoc($result)) {
-                //$bIdInDB = $row['id'];
-                $per_seat_cost = $row['cost'];
-            }
-            $payment = $per_seat_cost * $number;
-
-            //checking user balance
-            $sql_balance_check = "SELECT balance from login WHERE username='$username'";
-            $balance_result = mysqli_query($conn, $sql_balance_check);
-
-            while ($row = mysqli_fetch_assoc($balance_result)) {
-                $balance = $row['balance'];
-            }
-
-            if ($balance >= $payment) {
-                //insert into train history table
-                $sql_insert_into_history = "INSERT INTO train_history (username, train_id, seat, payment, status) VALUES ('$username', '$train_list', '$number', '$payment', 'paid');";
-                mysqli_query($conn, $sql_insert_into_history);
-
-                $new_balance = $balance - $payment;
-
-                //updating balance after successfull ticket booking
-                $sql_update_balance = "UPDATE login SET balance='$new_balance' WHERE username='$username'";
-                mysqli_query($conn, $sql_update_balance);
-
-
-                //updating available seat number
-                $new_available_seat = $available_seat - $number;
-                $sql_update_available_seat = "UPDATE train_list SET available_seat='$new_available_seat' WHERE id='$train_list'";
-                mysqli_query($conn, $sql_update_available_seat);
-
-
-                $numberErr = "Successfully booked";
-                $board = $destination = $choose_type = $train_list = "";
-                $number = 0;
+    
+        if (empty($_POST['destination'])) {
+            $destinationErr = "Please Select board or destination location.";
+        } else {
+            if ($board == $_POST['destination']) {
+                $destinationErr = "Board & destination Location cannot be same.";
             } else {
-                $numberErr = "You don't have sufficient balance";
+                $destination = $_POST['destination'];
             }
+        }
+    
+        if (empty($_POST['choose_type'])) {
+            $choose_typeErr = "Please Select the type of train.";
         } else {
-            $numberErr = "The number of seat you want is not available";
+            $choose_type = $_POST['choose_type'];
+        }
+    
+        if (empty($_POST['train_list'])) {
+            $train_listErr = "Please Select a destination location.";
+        } else {
+            $train_list = $_POST['train_list'];
+        }
+    
+        if (empty($_POST['number'])) {
+            $numberErr = "Please Select a number of seat.";
+        } else {
+        }
+    
+        if (!empty($_POST['board']) && !empty($_POST['destination']) && !empty($_POST['number']) && !empty($_POST['choose_type']) && !empty($_POST['train_list'])) {
+            $chosen_number = $_POST['number'];
+            $sql_seat_check = "SELECT available_seat FROM train_list WHERE id='$train_list' and board = '$board' and destination = '$destination'";
+            $seat = mysqli_query($conn, $sql_seat_check);
+    
+            while ($row = mysqli_fetch_assoc($seat)) {
+                $available_seat = $row['available_seat'];
+            }
+    
+            if ($available_seat >= $chosen_number) {
+                $number = $chosen_number;
+    
+                $username = $_SESSION['username'];
+                $sql_train_check = "SELECT id, cost from train_list WHERE id='$train_list' and board = '$board' and destination = '$destination'";
+                $result = mysqli_query($conn, $sql_train_check);
+    
+                while ($row = mysqli_fetch_assoc($result)) {
+                    //$bIdInDB = $row['id'];
+                    $per_seat_cost = $row['cost'];
+                }
+                $payment = $per_seat_cost * $number;
+    
+                //checking user balance
+                $sql_balance_check = "SELECT balance from login WHERE username='$username'";
+                $balance_result = mysqli_query($conn, $sql_balance_check);
+    
+                while ($row = mysqli_fetch_assoc($balance_result)) {
+                    $balance = $row['balance'];
+                }
+    
+                if ($balance >= $payment) {
+                    //insert into train history table
+                    $sql_insert_into_history = "INSERT INTO train_history (username, train_id, seat, payment, status) VALUES ('$username', '$train_list', '$number', '$payment', 'paid');";
+                    mysqli_query($conn, $sql_insert_into_history);
+    
+                    $new_balance = $balance - $payment;
+    
+                    //updating balance after successfull ticket booking
+                    $sql_update_balance = "UPDATE login SET balance='$new_balance' WHERE username='$username'";
+                    mysqli_query($conn, $sql_update_balance);
+    
+    
+                    //updating available seat number
+                    $new_available_seat = $available_seat - $number;
+                    $sql_update_available_seat = "UPDATE train_list SET available_seat='$new_available_seat' WHERE id='$train_list'";
+                    mysqli_query($conn, $sql_update_available_seat);
+    
+    
+                    $numberErr = "Successfully booked";
+                    $board = $destination = $choose_type = $train_list = "";
+                    $number = 0;
+                } else {
+                    $numberErr = "You don't have sufficient balance";
+                }
+            } else {
+                $numberErr = "The number of seat you want is not available";
+            }
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -167,10 +174,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             document.getElementById('number').style.display = 'none';
             document.getElementById('number_label').style.display = 'none';
-        }
-
-        function reset_page() {
-            window.location.reload();
         }
 
         function show_per_seat_cost(str, number, type) {
@@ -246,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div style="color: green" id="txtHint">You will see Per seat cost & Total cost here.</div><br>
 
 
-            <input type="button" Value="Reset" onclick="reset_page()">
+            <input type="submit" name="reset" Value="Reset">
             <input type="submit" value="Confirm" id="submit">
             <p style="color: yellow"><?php echo $numberErr; ?></p><br>
             <p style="color: yellow"><?php echo $destinationErr; ?></p>
