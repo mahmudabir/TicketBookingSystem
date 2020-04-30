@@ -8,7 +8,7 @@
 		$board = $_POST['bid']; 
 		$destination = $_POST['did'];
 		$launchtype = $_POST['ttype'];
-		$stmt = $conn->prepare("SELECT * FROM launch_list WHERE board = '$board' and destination = '$destination' and available_seat > 0 and type = '$traintype' " );
+		$stmt = $conn->prepare("SELECT * FROM launch_list WHERE board = '$board' and destination = '$destination' and available_seat > 0 and type = '$launchtype' " );
 		$stmt->execute();
 		$launch_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		echo json_encode($launch_list);
