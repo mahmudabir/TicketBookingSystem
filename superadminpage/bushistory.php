@@ -5,6 +5,20 @@
     if (!isset($_SESSION['username'])) {
         header("Location: ../login/login.php");
     }
+    /*For Cancel Order*/
+    $id = $idErr ="";
+    if(isset($_POST['Confirm'])){
+        if(empty($_POST['id'])){
+            $idErr="This Field Cannot be empty!";
+        }else{
+            $id=mysqli_real_escape_string($conn,$_POST['id']);
+        }
+        if(!empty($id)){
+            $sqll="UPDATE bus_history SET status='cancel' WHERE id='$id';";
+            mysqli_query($conn,$sqll);
+        }
+    }
+    /*For Cancel Order*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,6 +103,10 @@
                 </table>
             </div>
         </section>
+        <form action="bushistory.php" method="post">
+            <span style="color:red"><?php echo $idErr?></span><br>
+            <label>Cancel Order here! <input type="number" name="id" placeholder="Enter Order Id here"> <input type="submit" name="Confirm" value="Confirm"></label>
+        </form>
     </div>
 </body>
 
