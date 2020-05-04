@@ -89,6 +89,8 @@ if (isset($_POST['Add'])) {
         }
     }
 
+}elseif(isset($_POST['Reset'])){
+    header("Location: ../superadminpage/train.php");
 }
 
 ?>
@@ -99,9 +101,7 @@ if (isset($_POST['Add'])) {
     <title></title>
     <link rel="stylesheet" href="transport.css">
     <script>
-        function reset_page() {
-            window.location.reload();
-        }
+        
     </script>
 </head>
 
@@ -126,7 +126,7 @@ if (isset($_POST['Add'])) {
             <p>Total Seat</p>
             <input type="number" name="seat" placeholder="Enter Seat Number" value="<?php echo $seat; ?>"><br><span style="color:red;"> <?php echo $seatErr; ?> </span><br>
 
-            <input type="button" value="Reset Fields" onclick="reset_page()">
+            <input type="button" name="Reset" value="Reset Fields">
             <input type="submit" name="Add" value="Add Train" style="margin-left:30px"><br><br>
 
             <p>Input the Train ID you want to Reset or Delete</p>
