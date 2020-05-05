@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    background: #000;
+    background: url(bus.jpeg);
+    background-size: cover;
     font-family: sans-serif;
     overflow: hidden;
 }
@@ -9,52 +10,100 @@ body {
 .box {
     width: 1170px;
     height: 790px;
-    background:rgb(238, 222, 222);
-    color: rgb(7, 7, 7);
+    background: #000;
+    color: #fff;
     top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 40px 30px;
-    border: 1px solid #000;
 }
 
 h1 {
     margin: 0;
     padding: 0 0 10px;
     text-align: center;
-    font-size: 28px;
+    font-size: 22px;
 }
-input[type="number"] {
-        background: #000;
-        height: 30px;
-        color: #fff;
-        font-size: 16px;
+
+.box p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
 }
-.tab{
-    margin-top: 20px;
-}   
-input[type="submit"] {
-        border: none;
-        outline: none;
-        height: 40px;
-        width: 150px;
-        background: #fb2525;
-        color: #fff;
-        font-size: 18px;
-        border-radius: 20px;
+
+.box input[type="text"] {
+    width: 32%;
+    margin-bottom: 20px;
 }
-input[type="submit"]:hover {
+
+.box input[type="number"] {
+    width: 32%;
+    margin-bottom: 20px;
+}
+
+.box input[type="text"] {
+    background: transparent;
+    height: 30px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.box select {
+    width: 32%;
+    height: 30px;
+    background: whitesmoke;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.box input[type="number"] {
+    background: transparent;
+    height: 30px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.box input[type="button"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.box input[type="submit"]:hover {
     cursor: pointer;
     background: #ffc107;
     color: #000;
 }
+
+.box input[type="button"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
 .table {
-    width: 850px;
+    width: 740px;
     height: 620px;
-    top: 58%;
-    left: 62%;
+    top: 51%;
+    left: 67%;
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
@@ -65,7 +114,7 @@ input[type="submit"]:hover {
 .table {
     padding: 20px;
     border: 1px solid #ddd;
-    background-color: rgb(245, 163, 163);
+    background-color: #000;
 }
 
 .content-table {

@@ -1,68 +1,180 @@
 <?php
-    include "../adminpage/common.inc.php";
-    session_start();
-    if (!isset($_SESSION['username'])) {
-        header("Location: ../login/login.php");
+include "../adminpage/common.inc.php";
+include "../db/db_connect.inc.php";
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login/login.php");
+}
+
+$busname = $source = $destination = $type = $cost = $seat = $busid = "";
+$busnameErr = $sourceErr = $destinationErr = $typeErr = $costErr = $seatErr = $success = $busidErr = "";
+
+
+if (isset($_POST['Add'])) {
+    # Add-button was clicked
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST['busname'])) {
+            $busnameErr = "Bus Name cannot be empty!";
+        } else {
+            $busname = mysqli_real_escape_string($conn, $_POST['busname']);
+        }
+        if (empty($_POST['source'])) {
+            $sourceErr = "Source cannot be empty!";
+        } else {
+            $source = mysqli_real_escape_string($conn, $_POST['source']);
+        }
+        if (empty($_POST['destination'])) {
+            $destinationErr = "Destination cannot be empty!";
+        } else {
+            $destination = mysqli_real_escape_string($conn, $_POST['destination']);
+        }
+        if (empty($_POST['type'])) {
+            $typeErr = "Type cannot be empty!";
+        } else {
+            $type = mysqli_real_escape_string($conn, $_POST['type']);
+        }
+        if (empty($_POST['cost'])) {
+            $costErr = "Cost cannot be empty!";
+        } else {
+            $cost = mysqli_real_escape_string($conn, $_POST['cost']);
+        }
+        if (empty($_POST['seat'])) {
+            $seatErr = "Seat cannot be empty!";
+        } else {
+            $seat = mysqli_real_escape_string($conn, $_POST['seat']);
+        }
+        if (!empty($busname) && !empty($source) && !empty($destination) && !empty($type) && !empty($cost) && !empty($seat)) {
+            $sql = "INSERT INTO bus_list (name, board, destination, type, cost, available_seat, total_seat) 
+                VALUES ('$busname', '$source', '$destination', '$type', '$cost', '$seat', '$seat');";
+            mysqli_query($conn, $sql);
+
+            $sql2 = "INSERT INTO bus_list (name, board, destination, type, cost, available_seat, total_seat) 
+                VALUES ('$busname', '$destination', '$source', '$type', '$cost', '$seat', '$seat');";
+            mysqli_query($conn, $sql2);
+
+            $success = "Successfully Submitted.";
+        }
     }
+} elseif (isset($_POST['Update'])) {
+    # Update-button was clicked
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST['busid'])) {
+            $busidErr = "Bus Name cannot be empty!";
+        } else {
+            $busid = mysqli_real_escape_string($conn, $_POST['busid']);
+        }
+
+        if (!empty($busid)) {
+            $sql = "UPDATE bus_list SET available_seat='40' WHERE id='$busid';";
+            mysqli_query($conn, $sql);
+
+            $success = "Done reset of available seat";
+        }
+    }
+} elseif (isset($_POST['Delete'])) {
+    # Delete-button was clicked
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST['busid'])) {
+            $busidErr = "Bus Name cannot be empty!";
+        } else {
+            $busid = mysqli_real_escape_string($conn, $_POST['busid']);
+        }
+
+        if (!empty($busid)) {
+            $sql = "DELETE FROM bus_list WHERE id='$busid';";
+            mysqli_query($conn, $sql);
+
+            $success = "Done reset of available seat";
+        }
+    }
+
+}elseif(isset($_POST['Reset'])){
+    header("Location: ../superadminpage/bus.php");
+}
 
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
-        <link rel="stylesheet" href="bus.css">
-        <script>
-            function validate(){
-                var input_from=document.getElementById("from");
-                if(input_from.value == ""){
-                    alert("Please Enter your city");
-                    return false;
-                }
-                var input_to=document.getElementById("to");
-                if(input_to.value == ""){
-                    alert("Please Enter your Destination city");
-                    return false;
-                }
-                var input_date=document.getElementById("date");
-                if(input_date.value == ""){
-                    alert("Please Pick Date of Journey");
-                    return false;
-                }
-                var input_bus=document.getElementById("bus");
-                if(input_bus.value == ""){
-                    alert("Please Choose a Bus!");
-                    return false;
-                }
-            } 
-        </script>
-    </head>
-    <body>
-        <div class="box">
-            <h1>Ticket booking here</h1>
-            <form action="bus.php" method="post" onsubmit="return validate();">
-                <p>From</p>
-                <input type="text" name="from" placeholder="Enter city" id="from"><br>
-                <p>TO</p>
-                <input type="text" name="to" placeholder="Enter City" id="to"><br>
-                <p>Date of Journey</p>
-                <input type="date" name="date" placeholder="Pick a date" id="date"><br>
-                <p>Bus Type</p>
-                <input type="radio" id="Ac" name="bus_type" value="Ac">
-                <label for="Ac">AC</label><br>
-                <input type="radio" id="NonAc" name="bus_type" value="NonAc">
-                <label for="Ac">NON AC</label><br>
-                <p>Bus Add</p>
-                <select id="bus">
-                <option value="void" disabled>Choose one</option>
-                    <option value="Hanif">Hanif</option>
-                    <option value="Green_Line">Green Line</option>
-                    <option value="Soudia">Soudia</option>
-                    <option value="Ena">ENA</option>
 
-                </select><br>
-                <input type="reset">
-                <input type="submit" value="Add">
-            </form>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="transport.css">
+    <script>
+    
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <h1>Bus Ticket Manage Here</h1>
+        <form action="bus.php" method="post">
+            <p>Bus Name</p>
+            <input type="text" name="busname" placeholder="Enter Bus Name" value="<?php echo $busname; ?>"><br><span style="color:red;"> <?php echo $busnameErr; ?> </span>
+            <p>Source</p>
+            <input type="text" name="source" placeholder="Enter City" value="<?php echo $source; ?>"><br><span style="color:red;"> <?php echo $sourceErr; ?> </span>
+            <p>Destination</p>
+            <input type="text" name="destination" placeholder="Enter city" value="<?php echo $destination; ?>"><br><span style="color:red;"> <?php echo $destinationErr; ?> </span>
+            <p>Type</p>
+            <select id="type" name="type">
+                <option selected="" disabled="">Choose Bus Type</option>
+                <option id="ac" value="ac">AC</option>
+                <option id="nonac" value="nonac">Non Ac</option>
+            </select><br>
+            <p>Cost</p>
+            <input type="number" name="cost" placeholder="Enter cost" value="<?php echo $cost; ?>"><br><span style="color:red;"> <?php echo $costErr; ?> </span>
+            <p>Total Seat</p>
+            <input type="number" name="seat" placeholder="Enter Seat Number" value="<?php echo $seat; ?>"><br><span style="color:red;"> <?php echo $seatErr; ?> </span><br>
+
+            <input type="submit" name="Reset" value="Reset Fields">
+            <input type="submit" name="Add" value="Add Bus" style="margin-left:30px"><br><br>
+
+            <p>Input the bus ID you want to Reset or Delete</p>
+            <input type="number" name="busid" placeholder="Input Bus ID">
+
+            <br><input type="submit" name="Update" value="Reset Av. Seat" style="margin-top:10px">
+            <input type="submit" name="Delete" value="Delete Bus" style="margin-left:30px">
+        </form>
+        <div align="right" class="table">
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Bus Name</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Type</th>
+                        <th>Cost</th>
+                        <th>Avilable Seat</th>
+                        <th>Total Seat</th>
+                    </tr>
+                </thead>
+                <?php
+                $sql = "SELECT *FROM bus_list";
+                $result = mysqli_query($conn, $sql);
+                $rowCount = mysqli_num_rows($result);
+                if ($rowCount > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tbody>
+                                <tr>
+                                <td>" . $row['id'] . "</td>
+                                <td>" . $row['name'] . "</td>
+                                <td>" . $row['board'] . "</td>
+                                <td>" . $row['destination'] . "</td> 
+                                <td>" . $row['type'] . "</td>
+                                <td>" . $row['cost'] . "</td>
+                                <td>" . $row['available_seat'] . "</td>
+                                <td>" . $row['total_seat'] . "</td>
+                                </tr>
+                            </tbody>";
+                    }
+                    echo "</table>";
+                }
+
+                ?>
+            </table>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
