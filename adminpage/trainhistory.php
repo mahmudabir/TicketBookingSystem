@@ -14,7 +14,7 @@
             $id=mysqli_real_escape_string($conn,$_POST['id']);
         }
         if(!empty($id)){
-            $sqll="UPDATE train_history SET status='cancel' WHERE id='$id';";
+            $sqll="UPDATE train_history SET status='canceled' WHERE id='$id';";
             mysqli_query($conn,$sqll);
         }
     }
