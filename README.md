@@ -10,7 +10,7 @@ The database we used here known as phpmyadmin and server we created using xampp.
 Login Information:
 
 USERNAME -------- PASSWORD -------- TYPE
-========================================
+...............................................
 mahmud   -------- 12345678 -------- Super Admin
 admin    -------- admin    -------- Admin
 abir     -------- 1234     -------- User
