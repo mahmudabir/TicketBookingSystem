@@ -7,7 +7,7 @@ The database we used here known as phpmyadmin and server we created using xampp.
 
 
 
-Login Information:<br />
+# Login Information:<br />
 
 USERNAME -------- PASSWORD -------- TYPE<br />
 
