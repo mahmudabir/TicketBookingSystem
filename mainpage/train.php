@@ -250,7 +250,7 @@ if (isset($_POST['reset'])) {
 
 
             <input type="submit" name="reset" Value="Reset">
-            <input type="submit" value="Confirm" id="submit">
+            <input type="submit" name="confirm" value="Confirm" id="submit">
             <p style="color: yellow"><?php echo $numberErr; ?></p><br>
             <p style="color: yellow"><?php echo $destinationErr; ?></p>
             <p style="color: yellow"><?php echo $choose_typeErr; ?></p>
