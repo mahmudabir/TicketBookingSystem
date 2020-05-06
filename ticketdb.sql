@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2020 at 09:30 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: May 06, 2020 at 08:00 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,7 +33,7 @@ CREATE TABLE `bus_history` (
   `username` varchar(100) NOT NULL,
   `bus_id` int(100) NOT NULL,
   `seat` int(100) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `payment` int(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -43,30 +43,30 @@ CREATE TABLE `bus_history` (
 --
 
 INSERT INTO `bus_history` (`id`, `username`, `bus_id`, `seat`, `date`, `payment`, `status`) VALUES
-(3, 'abir', 1, 1, '2020-04-21 18:33:23', 300, 'paid'),
-(4, 'abir', 1, 2, '2020-04-21 21:32:19', 600, 'paid'),
-(5, 'abir', 3, 2, '2020-04-21 21:32:44', 600, 'paid'),
-(6, 'abir', 1, 2, '2020-04-21 21:33:17', 600, 'paid'),
-(7, 'abir', 1, 3, '2020-04-21 21:33:25', 900, 'paid'),
-(8, 'abir', 1, 3, '2020-04-21 21:43:03', 900, 'paid'),
-(9, 'abir', 3, 4, '2020-04-21 21:43:18', 1200, 'paid'),
+(3, 'abir', 1, 1, '2020-04-21 18:33:23', 300, 'canceled'),
+(4, 'abir', 1, 2, '2020-04-21 21:32:19', 600, 'canceled'),
+(5, 'abir', 3, 2, '2020-04-21 21:32:44', 600, 'canceled'),
+(6, 'abir', 1, 2, '2020-04-21 21:33:17', 600, 'canceled'),
+(7, 'abir', 1, 3, '2020-04-21 21:33:25', 900, 'canceled'),
+(8, 'abir', 1, 3, '2020-04-21 21:43:03', 900, 'canceled'),
+(9, 'abir', 3, 4, '2020-04-21 21:43:18', 1200, 'canceled'),
 (10, 'abir', 3, 1, '2020-04-21 21:43:46', 300, 'paid'),
 (11, 'abir', 3, 1, '2020-04-21 21:44:53', 300, 'paid'),
 (12, 'abir', 3, 1, '2020-04-21 21:45:12', 300, 'paid'),
-(13, 'abir', 3, 1, '2020-04-21 21:45:19', 300, 'paid'),
-(14, 'abir', 5, 1, '2020-04-21 21:45:35', 350, 'paid'),
+(13, 'abir', 3, 1, '2020-04-21 21:45:19', 300, 'canceled'),
+(14, 'abir', 5, 1, '2020-04-21 21:45:35', 350, 'canceled'),
 (15, 'abir', 5, 1, '2020-04-21 21:46:21', 350, 'paid'),
-(16, 'abir', 7, 1, '2020-04-21 21:47:43', 220, 'paid'),
+(16, 'abir', 7, 1, '2020-04-21 21:47:43', 220, 'canceled'),
 (17, 'abir', 7, 1, '2020-04-21 21:47:53', 220, 'paid'),
 (18, 'abir', 7, 1, '2020-04-21 21:48:59', 220, 'paid'),
 (19, 'abir', 7, 1, '2020-04-21 21:49:02', 220, 'paid'),
 (20, 'abir', 7, 1, '2020-04-21 21:49:13', 220, 'paid'),
 (21, 'abir', 3, 4, '2020-04-21 21:49:29', 1200, 'paid'),
-(22, 'abir', 3, 4, '2020-04-21 21:54:57', 1200, 'paid'),
+(22, 'abir', 3, 4, '2020-04-21 21:54:57', 1200, 'canceled'),
 (23, 'abir', 3, 4, '2020-04-21 21:55:09', 1200, 'paid'),
 (24, 'abir', 5, 1, '2020-04-21 21:55:32', 350, 'paid'),
 (25, 'abir', 5, 1, '2020-04-21 21:55:42', 350, 'paid'),
-(26, 'abir', 5, 1, '2020-04-21 21:56:29', 350, 'paid'),
+(26, 'abir', 5, 1, '2020-04-21 21:56:29', 350, 'canceled'),
 (27, 'abir', 5, 1, '2020-04-21 21:56:56', 350, 'paid'),
 (28, 'abir', 5, 1, '2020-04-21 21:58:47', 350, 'paid'),
 (29, 'abir', 5, 1, '2020-04-21 21:58:50', 350, 'paid'),
@@ -98,7 +98,7 @@ INSERT INTO `bus_history` (`id`, `username`, `bus_id`, `seat`, `date`, `payment`
 (55, 'abir', 7, 1, '2020-04-21 22:15:40', 220, 'paid'),
 (56, 'abir', 7, 1, '2020-04-21 22:27:54', 220, 'paid'),
 (57, 'abir', 7, 1, '2020-04-21 22:28:15', 220, 'paid'),
-(58, 'abir', 5, 1, '2020-04-21 22:42:00', 350, 'paid'),
+(58, 'abir', 5, 1, '2020-04-21 22:42:00', 350, 'canceled'),
 (59, 'abir', 5, 1, '2020-04-21 22:46:16', 350, 'paid'),
 (60, 'abir', 7, 1, '2020-04-22 10:46:34', 220, 'paid'),
 (61, 'abir', 7, 1, '2020-04-22 10:53:43', 220, 'paid'),
@@ -136,7 +136,7 @@ INSERT INTO `bus_history` (`id`, `username`, `bus_id`, `seat`, `date`, `payment`
 (93, 'abir', 7, 3, '2020-04-22 19:01:13', 660, 'paid'),
 (94, 'abir', 7, 3, '2020-04-22 19:01:59', 660, 'paid'),
 (95, 'abir', 7, 3, '2020-04-22 19:02:00', 660, 'paid'),
-(96, 'abir', 7, 3, '2020-04-22 19:02:00', 660, 'paid'),
+(96, 'abir', 7, 3, '2020-04-22 19:02:00', 660, 'canceled'),
 (97, 'abir', 1, 2, '2020-04-22 19:02:23', 600, 'paid'),
 (98, 'abir', 1, 2, '2020-04-22 19:02:32', 600, 'paid'),
 (99, 'abir', 1, 2, '2020-04-22 19:02:34', 600, 'paid'),
@@ -145,8 +145,9 @@ INSERT INTO `bus_history` (`id`, `username`, `bus_id`, `seat`, `date`, `payment`
 (104, 'abir', 2, 3, '2020-04-23 17:09:40', 900, 'paid'),
 (105, 'abir', 7, 3, '2020-04-25 20:36:43', 660, 'paid'),
 (106, 'abir', 7, 3, '2020-04-25 20:36:45', 660, 'paid'),
-(107, 'abir', 7, 3, '2020-04-25 20:36:48', 660, 'paid'),
-(108, 'abir', 1, 3, '2020-04-25 20:45:42', 900, 'paid');
+(107, 'abir', 7, 3, '2020-04-25 20:36:48', 660, 'canceled'),
+(108, 'abir', 1, 3, '2020-04-25 20:45:42', 900, 'paid'),
+(109, 'hasib', 1, 3, '2020-05-06 15:19:57', 900, 'paid');
 
 -- --------------------------------------------------------
 
@@ -161,8 +162,8 @@ CREATE TABLE `bus_list` (
   `destination` varchar(100) NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'nonac',
   `cost` int(100) NOT NULL,
-  `available_seat` int(100) NOT NULL DEFAULT '40',
-  `total_seat` int(100) NOT NULL DEFAULT '40'
+  `available_seat` int(100) NOT NULL DEFAULT 40,
+  `total_seat` int(100) NOT NULL DEFAULT 40
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -170,13 +171,13 @@ CREATE TABLE `bus_list` (
 --
 
 INSERT INTO `bus_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, `available_seat`, `total_seat`) VALUES
-(1, 'Shonar Bangla', 'Dhaka', 'Sherpur', 'nonac', 300, 40, 40),
+(1, 'Shonar Bangla', 'Dhaka', 'Sherpur', 'nonac', 300, 3, 40),
 (2, 'Shonar Bangla', 'Sherpur', 'Dhaka', 'nonac', 300, 40, 40),
-(3, 'Hazi', 'Dhaka', 'Sherpur', 'nonac', 300, 40, 40),
+(3, 'Hazi', 'Dhaka', 'Sherpur', 'nonac', 300, 1, 40),
 (4, 'Hazi', 'Sherpur', 'Dhaka', 'nonac', 300, 40, 40),
-(5, 'Hanif', 'Dhaka', 'Mymensingh', 'ac', 350, 40, 40),
+(5, 'Hanif', 'Dhaka', 'Mymensingh', 'ac', 350, 1, 40),
 (6, 'Hanif', 'Mymensingh', 'Dhaka', 'ac', 350, 40, 40),
-(7, 'Ena', 'Dhaka', 'Mymensingh', 'nonac', 220, 40, 40),
+(7, 'Ena', 'Dhaka', 'Mymensingh', 'nonac', 220, 3, 40),
 (8, 'Ena', 'Mymensingh', 'Dhaka', 'nonac', 220, 40, 40),
 (9, 'AC Super', 'Dhaka', 'Sherpur', 'ac', 400, 40, 40),
 (10, 'AC Super', 'Sherpur', 'Dhaka', 'ac', 400, 40, 40),
@@ -198,10 +199,17 @@ CREATE TABLE `launch_history` (
   `username` varchar(100) NOT NULL,
   `launch_id` int(100) NOT NULL,
   `seat` int(100) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `payment` int(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `launch_history`
+--
+
+INSERT INTO `launch_history` (`id`, `username`, `launch_id`, `seat`, `date`, `payment`, `status`) VALUES
+(1, 'hasib', 14, 4, '2020-05-06 15:20:54', 1400, 'cancel');
 
 -- --------------------------------------------------------
 
@@ -216,8 +224,8 @@ CREATE TABLE `launch_list` (
   `destination` varchar(100) NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'nonac',
   `cost` int(100) NOT NULL,
-  `available_seat` int(100) NOT NULL DEFAULT '240',
-  `total_seat` int(100) NOT NULL DEFAULT '240'
+  `available_seat` int(100) NOT NULL DEFAULT 240,
+  `total_seat` int(100) NOT NULL DEFAULT 240
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -236,7 +244,7 @@ INSERT INTO `launch_list` (`id`, `name`, `board`, `destination`, `type`, `cost`,
 (11, 'Bay Cruiser', 'Cox\'s Bazar', 'Saint Martin', 'ac', 450, 300, 300),
 (12, 'Bay Cruiser', 'Saint Martin', 'Cox\'s Bazar', 'ac', 450, 300, 300),
 (13, 'Surovi', 'Dhaka', 'Barishal', 'nonac', 350, 300, 300),
-(14, 'Surovi', 'Barishal', 'Dhaka', 'nonac', 350, 300, 300);
+(14, 'Surovi', 'Barishal', 'Dhaka', 'nonac', 350, 296, 300);
 
 -- --------------------------------------------------------
 
@@ -252,7 +260,7 @@ CREATE TABLE `login` (
   `lastname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `nid` varchar(100) NOT NULL,
-  `balance` int(100) NOT NULL DEFAULT '0',
+  `balance` int(100) NOT NULL DEFAULT 0,
   `type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -261,9 +269,9 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `nid`, `balance`, `type`) VALUES
-(26, 'abir', '$2y$10$X0wNChsxszQ/8xqe6axlH.jqrhzPwd1wdBptAtID1BHoF.e.FpUVG', 'Abir', 'Mahmud', 'amabirmahmud@gmail.com', '1234567890357890897654323456789', 2147455497, 'user'),
-(27, 'hasib', '$2y$10$XXzhoIJFhkgZa3iyOtO8jeVXiGqvx.rYVPcB704NOQutdR7hUnINa', 'Hasib', 'Shanto', 'hasibshanto0@gmail.com', '987654321', 2147483647, 'user'),
-(28, 'ayon', '$2y$10$6GBqrMcHWKM701fzl/U7ZugbR9axUDYkXwcler8bPsKGCYn8N93wu', 'Nabil Arman', 'Ayon', 'nabilarmanayon@gmail.com', '3214567', 2147483647, 'user'),
+(26, 'abir', '$2y$10$X0wNChsxszQ/8xqe6axlH.jqrhzPwd1wdBptAtID1BHoF.e.FpUVG', 'Abir', 'Mahmud', 'amabirmahmud@gmail.com', '1234567890357890897654323456789', 1179, 'user'),
+(27, 'hasib', '$2y$10$XXzhoIJFhkgZa3iyOtO8jeVXiGqvx.rYVPcB704NOQutdR7hUnINa', 'Hasib', 'Shanto', 'hasibshanto0@gmail.com', '987654321', 2147479647, 'user'),
+(28, 'ayon', '$2y$10$jkxqk8XkyM2WA8dAGeSw8.L2FoPich6KnVvmX0F4AKDK0nbxk2Vwq', 'Nabil Arman', 'Ayon', 'nabilarmanayon@gmail.com', '3214567', 2147483647, 'user'),
 (1003, 'mahmud', '$2y$10$QWQutDEI1HegmOwd/9ppJuMlNSUsytHrvC3WnXjujSEQL0zBsLCk2', 'Abir', 'Mahmud', 'asdas@asdasd', '2147483647', 2147482747, 'superadmin'),
 (1004, 'admin', '$2y$10$0UbaPxqagOVW6J/scUh4jesvUn/Nxih5Mkb13DVq1zDuvNOpvxIXW', 'Abir', 'Mahmud', 'asdfghjk@sfdghj', '123456789123', 0, 'admin');
 
@@ -278,7 +286,7 @@ CREATE TABLE `train_history` (
   `username` varchar(100) NOT NULL,
   `train_id` int(100) NOT NULL,
   `seat` int(100) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `payment` int(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -288,9 +296,11 @@ CREATE TABLE `train_history` (
 --
 
 INSERT INTO `train_history` (`id`, `username`, `train_id`, `seat`, `date`, `payment`, `status`) VALUES
-(1, 'abir', 4, 3, '2020-04-23 04:31:51', 900, 'paid'),
+(1, 'abir', 4, 3, '2020-04-23 04:31:51', 900, 'cancel'),
 (2, 'abir', 6, 4, '2020-04-23 17:21:06', 1600, 'paid'),
-(3, 'abir', 2, 3, '2020-04-25 20:21:22', 450, 'paid');
+(3, 'abir', 2, 3, '2020-04-25 20:21:22', 450, 'paid'),
+(4, 'hasib', 11, 4, '2020-05-06 15:25:24', 1400, 'cancel'),
+(5, 'hasib', 1, 2, '2020-05-06 15:39:17', 300, 'cancel');
 
 -- --------------------------------------------------------
 
@@ -305,8 +315,8 @@ CREATE TABLE `train_list` (
   `destination` varchar(100) NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'nonac',
   `cost` int(100) NOT NULL,
-  `available_seat` int(100) NOT NULL DEFAULT '240',
-  `total_seat` int(100) NOT NULL DEFAULT '240'
+  `available_seat` int(100) NOT NULL DEFAULT 240,
+  `total_seat` int(100) NOT NULL DEFAULT 240
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -314,7 +324,7 @@ CREATE TABLE `train_list` (
 --
 
 INSERT INTO `train_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, `available_seat`, `total_seat`) VALUES
-(1, 'Agnibina', 'Dhaka', 'Tarakandi', 'nonac', 150, 240, 240),
+(1, 'Agnibina', 'Dhaka', 'Tarakandi', 'nonac', 150, 238, 240),
 (2, 'Agnibina', 'Tarakandi', 'Dhaka', 'nonac', 150, 240, 240),
 (3, 'Trina', 'Dhaka', 'Chittagong', 'nonac', 300, 240, 240),
 (4, 'Trina', 'Chittagong', 'Dhaka', 'nonac', 300, 240, 240),
@@ -324,7 +334,7 @@ INSERT INTO `train_list` (`id`, `name`, `board`, `destination`, `type`, `cost`, 
 (8, 'Sonar Bangla', 'Chittagong', 'Dhaka', 'ac', 450, 240, 240),
 (9, 'Meghna', 'Chandpur', 'Chittagong', 'nonac', 350, 240, 240),
 (10, 'Meghna', 'Chittagong', 'Chandpur', 'nonac', 350, 240, 240),
-(11, 'Sundorban Express', 'Dhaka', 'Khulna', 'ac', 350, 240, 240),
+(11, 'Sundorban Express', 'Dhaka', 'Khulna', 'ac', 350, 236, 240),
 (12, 'Sundorban Express', 'Khulna', 'Dhaka', 'ac', 350, 240, 240);
 
 --
@@ -382,7 +392,7 @@ ALTER TABLE `train_list`
 -- AUTO_INCREMENT for table `bus_history`
 --
 ALTER TABLE `bus_history`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `bus_list`
@@ -394,7 +404,7 @@ ALTER TABLE `bus_list`
 -- AUTO_INCREMENT for table `launch_history`
 --
 ALTER TABLE `launch_history`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `launch_list`
@@ -412,7 +422,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `train_history`
 --
 ALTER TABLE `train_history`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `train_list`
