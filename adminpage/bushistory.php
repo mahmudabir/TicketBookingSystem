@@ -43,6 +43,7 @@ if (isset($_POST['Confirm'])) {
             $balance = $balanceInDB + $return_payment;
             $sql_return_payment = "UPDATE login SET balance='$balance' WHERE username='$username'";
             mysqli_query($conn, $sql_return_payment);
+
             //update the history status to canceled
             $sqll = "UPDATE bus_history SET status='canceled' WHERE id='$id';";
             mysqli_query($conn, $sqll);
@@ -143,5 +144,4 @@ if (isset($_POST['Confirm'])) {
         </form>
     </div>
 </body>
-
 </html>

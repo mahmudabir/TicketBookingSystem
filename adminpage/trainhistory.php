@@ -1,27 +1,63 @@
 <?php
-    include "../superadminpage/common.inc.php";
-    include "../db/db_connect.inc.php";
-    session_start();
-    if (!isset($_SESSION['username'])) {
-        header("Location: ../login/login.php");
+include "../superadminpage/common.inc.php";
+include "../db/db_connect.inc.php";
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login/login.php");
+}
+/*For Cancel Order*/
+$id = $idErr = $username = $train_id = $seat = $payment = "";
+$payment = $seat = $balance = $balanceInDB = $return_payment = 0;
+if (isset($_POST['Confirm'])) {
+    if (empty($_POST['id'])) {
+        $idErr = "This Field Cannot be empty!";
+    } else {
+        $id = mysqli_real_escape_string($conn, $_POST['id']);
     }
-    /*For Cancel Order*/
-    $id = $idErr ="";
-    if(isset($_POST['Confirm'])){
-        if(empty($_POST['id'])){
-            $idErr="This Field Cannot be empty!";
-        }else{
-            $id=mysqli_real_escape_string($conn,$_POST['id']);
-        }
-        if(!empty($id)){
-            $sqll="UPDATE train_history SET status='canceled' WHERE id='$id';";
-            mysqli_query($conn,$sqll);
+    if (!empty($id)) {
+        $sql_Get_History = "SELECT * FROM train_history WHERE id='$id' AND status='paid'";
+        $result = mysqli_query($conn, $sql_Get_History);
+        $rowCount = mysqli_num_rows($result);
+
+        if ($rowCount < 1) {
+            $idErr = "The history with this ID is already canceled or wrong input!";
+        } else {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $username = $row['username'];
+                $train_id = $row['train_id'];
+                $seat = $row['seat'];
+                $payment = $row['payment'];
+            }
+            //return seat to available seat
+            $sql_return_seat = "UPDATE train_list SET available_seat='$seat' WHERE id='$train_id'";
+            mysqli_query($conn, $sql_return_seat);
+
+            //return 90% of payment
+            $return_payment = $payment * 0.9;
+            $sql_get_balance = "SELECT balance FROM login WHERE username='$username'";
+            $balanceResult = mysqli_query($conn, $sql_get_balance);
+
+            while ($row = mysqli_fetch_assoc($balanceResult)) {
+                $balanceInDB = $row['balance'];
+            }
+            $balance = $balanceInDB + $return_payment;
+            $sql_return_payment = "UPDATE login SET balance='$balance' WHERE username='$username'";
+            mysqli_query($conn, $sql_return_payment);
+
+            //update the history status to canceled
+            $sqll = "UPDATE train_history SET status='canceled' WHERE id='$id';";
+            mysqli_query($conn, $sqll);
+
+            $payment = $seat = $balance = $balanceInDB = $return_payment = 0;
+            $idErr = "Booking canceling successful.";
         }
     }
-    /*For Cancel Order*/
+}
+/*For Cancel Order*/
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>History</title>
     <meta charset="UTF-8">
@@ -34,7 +70,7 @@
     <div class="table">
         <h1>Train History Table</h1>
         <section>
-        <div class="tab2">
+            <div class="tab2">
                 <table class="content-table">
                     <thead>
                         <tr>
@@ -52,17 +88,17 @@
 
                     <?php
                     /*pagination*/
-                    $rpp1=05;
-                    isset($_GET['page'])?$pageno =$_GET['page']:$pageno=0;
-                    if($pageno>1){
-                        $start1 =($pageno * $rpp1)-$rpp1;
-                    }else{
-                        $start1=0;
+                    $rpp1 = 05;
+                    isset($_GET['page']) ? $pageno = $_GET['page'] : $pageno = 0;
+                    if ($pageno > 1) {
+                        $start1 = ($pageno * $rpp1) - $rpp1;
+                    } else {
+                        $start1 = 0;
                     }
-                    $sqli1="SELECT *FROM train_history";
-                    $resultSet1=mysqli_query($conn,$sqli1);
-                    $numRows1=mysqli_num_rows($resultSet1);
-                    $totalpages1=ceil($numRows1/$rpp1);
+                    $sqli1 = "SELECT *FROM train_history";
+                    $resultSet1 = mysqli_query($conn, $sqli1);
+                    $numRows1 = mysqli_num_rows($resultSet1);
+                    $totalpages1 = ceil($numRows1 / $rpp1);
                     /*pagination*/
                     $sql = "SELECT train_history.id, train_history.username, train_list.name, train_list.board, train_list.destination, train_history.seat, train_history.date, train_history.payment,train_history.status FROM train_history INNER JOIN train_list ON train_history.train_id = train_list.id LIMIT $start1,$rpp1";
                     $result = mysqli_query($conn, $sql);
@@ -89,16 +125,14 @@
                         echo $message = "No History!";
                     }
                     /*pagination*/
-                    if($pageno>1)
-                    {
-                        echo "<a href='?page=".($pageno-1)."' class='btn'>Previous<</a>";
+                    if ($pageno > 1) {
+                        echo "<a href='?page=" . ($pageno - 1) . "' class='btn'>Previous<</a>";
                     }
-                    for($x=1;$x <= $totalpages1;$x++){
+                    for ($x = 1; $x <= $totalpages1; $x++) {
                         echo "<a href='?page=$x' class='btn'>   $x</a>";
                     }
-                    if($x>1)
-                    {
-                        echo "<a href='?page=".($pageno+1)."' class='btn'>Next></a>";
+                    if ($x > 1) {
+                        echo "<a href='?page=" . ($pageno + 1) . "' class='btn'>Next></a>";
                     }
                     /*pagination*/
                     ?>
@@ -106,7 +140,7 @@
             </div>
         </section>
         <form action="trainhistory.php" method="post">
-            <span style="color:red"><?php echo $idErr?></span><br>
+            <span style="color:red"><?php echo $idErr ?></span><br>
             <label>Cancel Order here! <input type="number" name="id" placeholder="Enter Order Id here"> <input type="submit" name="Confirm" value="Confirm"></label>
         </form>
     </div>
