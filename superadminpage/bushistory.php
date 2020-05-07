@@ -6,19 +6,54 @@
         header("Location: ../login/login.php");
     }
     /*For Cancel Order*/
-    $id = $idErr ="";
-    if(isset($_POST['Confirm'])){
-        if(empty($_POST['id'])){
-            $idErr="This Field Cannot be empty!";
-        }else{
-            $id=mysqli_real_escape_string($conn,$_POST['id']);
-        }
-        if(!empty($id)){
-            $sqll="UPDATE bus_history SET status='canceled' WHERE id='$id';";
-            mysqli_query($conn,$sqll);
+$id = $idErr = $username = $bus_id = $seat = $payment = "";
+$payment = $seat = $balance = $balanceInDB = $return_payment = 0; 
+if (isset($_POST['Confirm'])) {
+    if (empty($_POST['id'])) {
+        $idErr = "This Field Cannot be empty!";
+    } else {
+        $id = mysqli_real_escape_string($conn, $_POST['id']);
+    }
+    if (!empty($id)) {
+        $sql_Get_History = "SELECT * FROM bus_history WHERE id='$id' AND status='paid'";
+        $result = mysqli_query($conn, $sql_Get_History);
+        $rowCount = mysqli_num_rows($result);
+
+        if ($rowCount < 1) {
+            $idErr = "The history with this ID is already canceled or wrong input!";
+        } else {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $username = $row['username'];
+                $bus_id = $row['bus_id'];
+                $seat = $row['seat'];
+                $payment = $row['payment'];
+            }
+            //return seat to available seat
+            $sql_return_seat = "UPDATE bus_list SET available_seat='$seat' WHERE id='$bus_id'";
+            mysqli_query($conn, $sql_return_seat);
+
+            //return 90% of payment
+            $return_payment = $payment * 0.9;
+            $sql_get_balance = "SELECT balance FROM login WHERE username='$username'";
+            $balanceResult = mysqli_query($conn, $sql_get_balance);
+
+            while ($row = mysqli_fetch_assoc($balanceResult)) {
+                $balanceInDB = $row['balance'];
+            }
+            $balance = $balanceInDB + $return_payment;
+            $sql_return_payment = "UPDATE login SET balance='$balance' WHERE username='$username'";
+            mysqli_query($conn, $sql_return_payment);
+
+            //update the history status to canceled
+            $sqll = "UPDATE bus_history SET status='canceled' WHERE id='$id';";
+            mysqli_query($conn, $sqll);
+
+            $payment = $seat = $balance = $balanceInDB = $return_payment = 0; 
+            $idErr = "Booking canceling successful.";
         }
     }
-    /*For Cancel Order*/
+}
+/*For Cancel Order*/
 ?>
 <!DOCTYPE html>
 <html>
