@@ -1,8 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: rgba(27, 31, 34, 0.85);
-    background: url(main.jpg);
+    background-color: #000;
     background-size: cover;
     overflow: hidden;
 }

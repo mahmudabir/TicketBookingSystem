@@ -118,8 +118,9 @@ label #cancel{
 .unknown{
 	width: 180px;
 	color: #009879;
-	background: #000;
+	background: rgb(15, 15, 15);
 	text-align: left;
+	font-weight: bold;
 	padding: 5px;
 	top: 5%;
 	left: 95%;
