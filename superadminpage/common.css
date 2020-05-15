@@ -115,6 +115,18 @@ label #cancel{
 	border-bottom-left-radius: 5px;
 	
 }
+.unknown{
+	width: 180px;
+	color: #009879;
+	background: #000;
+	text-align: left;
+	padding: 5px;
+	top: 5%;
+	left: 95%;
+	position: absolute;
+	transform: translate(-50% ,-50%);
+	box-sizing: border-box;
+}
 
 
 

@@ -1,11 +1,5 @@
 <?php
 include "../mainpage/common.inc.php";
-include "../db/db_connect.inc.php";
-session_start();
-
-if (!isset($_SESSION['username'])) {
-	header("Location: ../login/login.php");
-}
 
 $oldpassword = $newpassword = $confirmnewpassword =  $username = $message = "";
 

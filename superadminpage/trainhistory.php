@@ -1,10 +1,6 @@
 <?php
     include "../superadminpage/common.inc.php";
-    include "../db/db_connect.inc.php";
-    session_start();
-    if (!isset($_SESSION['username'])) {
-        header("Location: ../login/login.php");
-    }
+    
     /*For Cancel Order*/
 $id = $idErr = $username = $train_id = $seat = $payment = "";
 $payment = $seat = $balance = $balanceInDB = $return_payment = 0; 

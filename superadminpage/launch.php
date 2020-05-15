@@ -1,11 +1,6 @@
 <?php
 include "../superadminpage/common.inc.php";
-include "../db/db_connect.inc.php";
 
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login/login.php");
-}
 
 $launchname = $source = $destination = $type = $cost = $seat = $launchid = "";
 $launchnameErr = $sourceErr = $destinationErr = $typeErr = $costErr = $seatErr = $success = $launchidErr = "";

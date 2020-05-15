@@ -1,5 +1,20 @@
 <?php
+	include "../db/db_connect.inc.php";
+
+	session_start();
+	if (!isset($_SESSION['username'])) {
+		header("Location: ../login/login.php");
+	} else {
+		$uname = $utype = $ufname = "";
+		$uname = $_SESSION['username'];
+		$sql = "SELECT * FROM login WHERE username='$uname'";
+		$result = mysqli_query($conn, $sql);
 	
+		while ($row = mysqli_fetch_assoc($result)) {
+			$utype = $row['type'];
+			$ufname = $row['firstname'];
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +52,11 @@
 				<a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
 				<a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
 			</div>
-		</nav>	
+		</nav>
+		<div class="unknown" class="boxp">
+			<p>Hello, <?php echo strtoupper($uname); ?></p>
+			<p>Username: <?php echo $uname; ?></p>
+			<p>User Type: <?php echo $utype; ?></p>
+		</div>	
 	</body>
 </html>
