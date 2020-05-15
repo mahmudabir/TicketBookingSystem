@@ -2,9 +2,11 @@
 	include "../db/db_connect.inc.php";
 
 	session_start();
-	if (!isset($_SESSION['username'])){
+	if (!isset($_SESSION['username'])) {
 		header("Location: ../login/login.php");
-	}else {
+	}elseif($_SESSION['type'] != "superadmin"){
+		header("Location: ../superadminpage/logout.php");
+	} else {
 		$uname = $utype = $ufname = "";
 		$uname = $_SESSION['username'];
 		$sql = "SELECT * FROM login WHERE username='$uname'";
@@ -14,6 +16,7 @@
 			$utype = $row['type'];
 			$ufname = $row['firstname'];
 		}
+		
 	}
 ?>
 

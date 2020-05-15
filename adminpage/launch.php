@@ -1,5 +1,5 @@
 <?php
-include "../superadminpage/common.inc.php";
+include "../adminpage/common.inc.php";
 
 $launchname = $source = $destination = $type = $cost = $seat = $launchid = "";
 $launchnameErr = $sourceErr = $destinationErr = $typeErr = $costErr = $seatErr = $success = $launchidErr = "";

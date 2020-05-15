@@ -4,6 +4,8 @@
 	session_start();
 	if (!isset($_SESSION['username'])) {
 		header("Location: ../login/login.php");
+	}elseif($_SESSION['type'] != "admin"){
+		header("Location: ../adminpage/logout.php");
 	} else {
 		$uname = $utype = $ufname = "";
 		$uname = $_SESSION['username'];
@@ -14,6 +16,7 @@
 			$utype = $row['type'];
 			$ufname = $row['firstname'];
 		}
+		
 	}
 ?>
 
