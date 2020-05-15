@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ((password_verify($password, $uPassInDB)) && ($type == "user")) {
 			$_SESSION['username'] = $username;
 			$_SESSION['type'] = $type;
-			header("Location: ../mainpage/mainpage.php");
+			header("Location: ../mainpage/main.php");
 		} else if ((password_verify($password, $uPassInDB)) && ($type == "admin")) {
 			$_SESSION['username'] = $username;
 			$_SESSION['type'] = $type;

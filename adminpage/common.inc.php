@@ -5,7 +5,11 @@
 	if (!isset($_SESSION['username'])) {
 		header("Location: ../login/login.php");
 	}elseif($_SESSION['type'] != "admin"){
-		header("Location: ../adminpage/logout.php");
+		if($_SESSION['type'] == "superadmin"){
+			header("Location: ../superadminpage/main.php");
+		}elseif($_SESSION['type'] == "user"){
+			header("Location: ../mainpage/main.php");
+		}
 	} else {
 		$uname = $utype = $ufname = "";
 		$uname = $_SESSION['username'];
