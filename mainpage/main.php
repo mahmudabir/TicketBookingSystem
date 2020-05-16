@@ -121,17 +121,17 @@ include "../mainpage/common.inc.php";
 
 		<div class="mySlides fade">
 			<div class="numbertext">1 / 3</div>
-			<a href="../mainpage/bus.php"><img src="ad1.jpeg" style="width:100%"></a>
+			<a href="../mainpage/bus.php"><img src="image1.jpg" style="width:100%"></a>
 		</div>
 
 		<div class="mySlides fade">
 			<div class="numbertext">2 / 3</div>
-			<a href="../mainpage/train.php"><img src="ad2.jpeg" style="width:100%"></a>
+			<a href="../mainpage/train.php"><img src="image2.jpg" style="width:100%"></a>
 		</div>
 
 		<div class="mySlides fade">
 			<div class="numbertext">3 / 3</div>
-			<a href="../mainpage/launch.php"><img src="ad3.jpeg" style="width:100%"></a>
+			<a href="../mainpage/launch.php"><img src="image3.jpg" style="width:100%"></a>
 		</div>
 
 		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
