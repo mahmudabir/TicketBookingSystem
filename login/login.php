@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			<input type="password" name="password" placeholder="Enter Password"><br><span><?php echo $passwordErr ?></span>
 			<span style="color:red"><?php echo $message; ?></span>
 			<input type="submit" name="" value="Login">
-			<a href="../changepassword/changepassword.php">Forget password?</a><br>
+			<a href="../forgetpass.php">Forget password?</a><br>
 			<a href="../signup/signup.php">Don't have an account?</a>
 
 		</form>
