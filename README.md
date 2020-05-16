@@ -13,6 +13,7 @@ USERNAME -------- PASSWORD -------- TYPE<br />
 
 mahmud   -------- 12345678 -------- Super Admin<br />
 admin    -------- admin    -------- Admin<br />
+hasib12  -------- hasib999 -------- Admin<br />
 abir     -------- 1234     -------- User<br />
 hasib    -------- 1234     -------- User<br />
 ayon     -------- user     -------- User<br />
